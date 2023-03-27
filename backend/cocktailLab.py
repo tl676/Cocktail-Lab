@@ -20,7 +20,7 @@ class CocktailLab:
 
         self.cocktail_names = self.cocktail_names_to_tags.keys()
 
-        self.tags_tfidf_vectorizer = self.make_vectorizer()
+        self.tags_tfidf_vectorizer = self.make_vectorizer(binary=True)
 
         tags = [self.cocktail_names_to_tags[cocktail] for cocktail in
                 self.cocktail_names_to_tags]
@@ -34,7 +34,7 @@ class CocktailLab:
         Parameters:
         file: name of file
 
-        Note: currently configured for cocktail_tags.csv (tags only)
+        ***Note: CURRENTLY CONFIGURED FOR COCKTAIL_TAGS.CSV***
         """
         with open(file) as csv_file:
             csv_reader = csv.reader(csv_file, delimiter=',')
@@ -110,6 +110,7 @@ class CocktailLab:
                 retval[ind] = 1
             except:
                 # token not in matrix
+                # TODO figure this out??
                 continue
         return retval
 
@@ -120,6 +121,7 @@ class CocktailLab:
         """
         num = np.dot(vec1, vec2)
         den = (np.linalg.norm(vec1)) * (np.linalg.norm(vec2))
+        # TODO possibly throwing errors due to divide by 0
         return num / den
 
     def cos_rank(self, query, doc_by_vocab):
@@ -169,57 +171,67 @@ class CocktailLab:
                 retval.append(d)
         return retval
 
-    def query(self, flavor_prefs, flavor_include=None, flavor_exclude=None):
-        print(f"prefs:{flavor_prefs} include:{flavor_include}")
+    def query(self, flavor_prefs=None, flavor_antiprefs=None, flavor_include=None, flavor_exclude=None):
+        print(
+            f"prefs:{flavor_prefs} antiprefs:{flavor_antiprefs} include:{flavor_include}")
 
+        # initialize variables
         matrix = self.tags_doc_by_vocab
-        rank_list = []
-        idx_list = []
-
-        flavor_prefs_vec = self.make_query([word.strip().lower()
-                                            for word in flavor_prefs.split(",")],
+        rank_list = None
+        idx_list = None
+        # vector of 0s:
+        flavor_prefs_vec = self.make_query([""],
                                            self.tags_tfidf_vectorizer,
                                            matrix)
-        
-        flavor_include_vec = self.make_query([word.strip().lower()
-                                              for word in flavor_include.split(",")],
-                                             self.tags_tfidf_vectorizer,
-                                             matrix)
+        # vector of 0s:
+        flavor_antiprefs_vec = self.make_query([""],
+                                               self.tags_tfidf_vectorizer,
+                                               matrix)
+        flavor_include_vec = None
+        cos_rank = None
+
+        # vectorize inputs
+        if flavor_prefs:
+            flavor_prefs_vec = self.make_query([word.strip().lower()
+                                                for word in flavor_prefs.split(",")],
+                                               self.tags_tfidf_vectorizer,
+                                               matrix)
+
+        if flavor_antiprefs:
+            flavor_antiprefs_vec = -1 * self.make_query([word.strip().lower()
+                                                         for word in flavor_antiprefs.split(",")],
+                                                        self.tags_tfidf_vectorizer,
+                                                        matrix)
+
+        if flavor_include:
+            flavor_include_vec = self.make_query([word.strip().lower()
+                                                  for word in flavor_include.split(",")],
+                                                 self.tags_tfidf_vectorizer,
+                                                 matrix)
 
         # cosine sim:
-        if flavor_prefs:
-            cos_rank = self.cos_rank(flavor_prefs_vec, matrix)
-            rank_list = [{
-                'name': self.cocktail_index_to_name[i[0]],
-                'flavors': self.cocktail_names_to_tags[self.cocktail_index_to_name[i[0]]]
-            } for i in cos_rank]
-        else:
-            cos_rank = self.cos_rank(
-                self.make_query(self.tags_tfidf_vectorizer.get_feature_names(),
-                                self.tags_tfidf_vectorizer,
-                                matrix),
-                matrix)
-            rank_list = [{
-                'name': self.cocktail_index_to_name[i[0]],
-                'flavors': self.cocktail_names_to_tags[self.cocktail_index_to_name[i[0]]]
-            } for i in cos_rank]
+        cos_rank = self.cos_rank(
+            flavor_prefs_vec + flavor_antiprefs_vec, matrix)
+        rank_list = [{
+            'name': self.cocktail_index_to_name[i[0]],
+            'flavors': self.cocktail_names_to_tags[self.cocktail_index_to_name[i[0]]]
+        } for i in cos_rank]
 
         # boolean and:
         if flavor_include:
             valid_idxs = self.boolean_search_and(flavor_include_vec, matrix)
             idx_list = valid_idxs
-            print(f"idx list {idx_list}, rank len before {len(rank_list)}")
+            # print(f"idx list {idx_list}, rank len before {len(rank_list)}")
             matrix = matrix[idx_list]
             rank_list = [
-                i for i in rank_list if self.cocktail_name_to_index[i['name']] in idx_list]
-
-        # if q == -1:
-        #     return ['Please enter proper input']
+                i for i in rank_list
+                if self.cocktail_name_to_index[i['name']] in idx_list]
 
         # print(drink_name_list)
         print(f"{len(rank_list)} drinks returned")
         return rank_list
 
 
+# here for testing purposes
 if __name__ == "__main__":
     cocktail = CocktailLab()

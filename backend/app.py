@@ -47,8 +47,9 @@ def home():
 @app.route("/query")
 def episodes_search():
     flavor_prefs = request.args.get("flavor_prefs")
+    flavor_antiprefs = request.args.get("flavor_antiprefs")
     flavor_include = request.args.get("flavor_include")
     # print(json.dumps(cocktailLab.query(flavor_prefs)))
-    return json.dumps(cocktailLab.query(flavor_prefs, flavor_include))
+    return json.dumps(cocktailLab.query(flavor_prefs, flavor_antiprefs, flavor_include))
 
 # app.run(debug=True)

@@ -3,7 +3,9 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Kanit&family=Montserrat&family=Open+Sans:wght@500&display=swap" rel="stylesheet">
+<link
+    href="https://fonts.googleapis.com/css2?family=Kanit&family=Montserrat&family=Open+Sans:wght@500&display=swap"
+    rel="stylesheet">
 
 <body>
     <div class="full-body-container">
@@ -18,18 +20,28 @@
             </div>
             <div class="input-box" onclick="sendFocus(1)">
                 <img src="{{ url_for('static', filename='images/mag.png') }}" />
-                <input placeholder="Preferred flavors" id="flavor-prefs" onkeyup="filterText()">
+                <input placeholder="Flavor likes" id="flavor-prefs"
+                    onkeyup="filterText(event)">
+            </div>
+            <div class="input-box" onclick="sendFocus(4)">
+                <img src="{{ url_for('static', filename='images/mag.png') }}" />
+                <input placeholder="Flavor dislikes" id="flavor-antiprefs"
+                    onkeyup="filterText(event)">
             </div>
             <div class="input-box" onclick="sendFocus(2)">
                 <img src="{{ url_for('static', filename='images/mag.png') }}" />
-                <input placeholder="Must include these flavors" id="flavor-include" onkeyup="filterText()">
+                <input placeholder="Must include these flavors"
+                    id="flavor-include"
+                    onkeyup="filterText(event)">
             </div>
+            <br>
+            <center>Press ENTER to search</center>
             <!-- <div class="input-box" onclick="sendFocus(3)">
                 <img src="{{ url_for('static', filename='images/mag.png') }}" />
                 <input placeholder="Must not include these flavors" id="flavor-exclude" onkeyup="filterText()">
             </div> -->
-        </div>
-        <div id="answer-box">
+            <div id="answer-box">
+            </div>
 
         </div>
     </div>
@@ -42,21 +54,26 @@
                 <p class='episode-desc'>${titleDesc}</p>
             </div>`
         }
-
+        
         function sendFocus(x) {
+            // i feel like this is spaghetti. this feels very stupid to me. unfortunately idk
+            // if theres a better way to do this 🤪
             switch(x) {
                 case 1: document.getElementById('flavor-prefs').focus(); break;
                 case 2: document.getElementById('flavor-include').focus(); break;
                 case 3: document.getElementById('flavor-exclude').focus(); break;
+                case 4: document.getElementById('flavor-antiprefs').focus(); break;
                 default: document.activeElement.blur()
             }
         }
 
-        function filterText() {
+        function filterText(event) {
+            if(event.keyCode == 13) {
             document.getElementById("answer-box").innerHTML = ""
             console.log(document.getElementById("flavor-prefs").value)
             fetch("/query?" + new URLSearchParams({
                     flavor_prefs: document.getElementById("flavor-prefs").value,
+                    flavor_antiprefs: document.getElementById("flavor-antiprefs").value,
                     flavor_include: document.getElementById("flavor-include").value
                 }).toString())
                 .then((response) => response.json())
@@ -68,7 +85,8 @@
                     tempDiv.innerHTML = answerBoxTemplate(row.name, row.flavors)
                     document.getElementById("answer-box").appendChild(tempDiv)
                 }));
-
+            }
         }
+        
     </script>
 </body>
