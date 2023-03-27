@@ -13,16 +13,16 @@ os.environ['ROOT_PATH'] = os.path.abspath(os.path.join("..", os.curdir))
 # These are the DB credentials for your OWN MySQL
 # Don't worry about the deployment credentials, those are fixed
 # You can use a different DB name if you want to
-MYSQL_USER = "root"
-MYSQL_USER_PASSWORD = ""
-MYSQL_PORT = 3306
-MYSQL_DATABASE = "cocktaildb"
+# MYSQL_USER = "root"
+# MYSQL_USER_PASSWORD = ""
+# MYSQL_PORT = 3306
+# MYSQL_DATABASE = "cocktaildb"
 
-mysql_engine = MySQLDatabaseHandler(
-    MYSQL_USER, MYSQL_USER_PASSWORD, MYSQL_PORT, MYSQL_DATABASE)
+# mysql_engine = MySQLDatabaseHandler(
+#     MYSQL_USER, MYSQL_USER_PASSWORD, MYSQL_PORT, MYSQL_DATABASE)
 
-# # Path to init.sql file. This file can be replaced with your own file for testing on localhost, but do NOT move the init.sql file
-mysql_engine.load_file_into_db()
+# # # Path to init.sql file. This file can be replaced with your own file for testing on localhost, but do NOT move the init.sql file
+# mysql_engine.load_file_into_db()
 
 app = Flask(__name__)
 CORS(app)
@@ -49,7 +49,8 @@ def episodes_search():
     flavor_prefs = request.args.get("flavor_prefs")
     flavor_antiprefs = request.args.get("flavor_antiprefs")
     flavor_include = request.args.get("flavor_include")
-    # print(json.dumps(cocktailLab.query(flavor_prefs)))
-    return json.dumps(cocktailLab.query(flavor_prefs, flavor_antiprefs, flavor_include))
+    flavor_exclude = request.args.get("flavor_exclude")
+    
+    return json.dumps(cocktailLab.query(flavor_prefs, flavor_antiprefs, flavor_include, flavor_exclude))
 
 # app.run(debug=True)

@@ -51,7 +51,6 @@ class CocktailLab:
             out = {}
             for row in csv_reader:
                 if line_count == 0:
-                    # print(f'Column names are {", ".join(row)}')
                     line_count += 1
                 else:
                     out[row[1].lower()] = row[2].lower()
@@ -173,11 +172,31 @@ class CocktailLab:
         """
         retval = []
         target = np.sum(query)
-        for d in range(len(doc_by_vocab)):
-            doc = doc_by_vocab[d]
+        for idx, doc in enumerate(doc_by_vocab):
             combine = np.logical_and(query, doc)
             if np.sum(combine) == target:
-                retval.append(d)
+                retval.append(idx)
+        return retval
+    
+    def boolean_search_not(self, query, doc_by_vocab):
+        """ Returns a list of doc indexes that contain none of the query words
+
+        Params:
+        query: ?? by 1 string np array
+            The desired ingredients, as computed by make_query
+        doc_by_vocab: ?? by ?? np array
+            The doc by vocab matrix as computed by make_matrix
+
+        Returns:
+            An int list where each element is the doc index of a doc containing 
+            none of the query words.
+        """
+        retval = []
+        target = np.sum(query)
+        for idx, doc in enumerate(doc_by_vocab):
+            combine = np.logical_and(query, doc)
+            if np.sum(combine) == 0:
+                retval.append(idx)
         return retval
 
     def query(self, flavor_prefs=None, flavor_antiprefs=None, flavor_include=None, flavor_exclude=None):
@@ -198,7 +217,8 @@ class CocktailLab:
         # initialize as vector of 0s:
         flavor_antiprefs_vec = self.make_query(
             [""], self.tags_tfidf_vectorizer, matrix)
-        flavor_include_vec = None
+        flavor_include_vec = np.zeros(len(self.index_to_vocab))
+        flavor_exclude_vec = np.zeros(len(self.index_to_vocab))
         cos_rank = None
 
         # vectorize inputs, if necessry
@@ -225,7 +245,11 @@ class CocktailLab:
                 matrix)
 
         if flavor_exclude:
-            pass  # TODO
+            flavor_exclude_vec = self.make_query(
+                [word.strip().lower()
+                 for word in flavor_exclude.split(",")],
+                self.tags_tfidf_vectorizer,
+                matrix)
 
         # cosine sim:
         cos_rank = self.cos_rank(
@@ -235,15 +259,15 @@ class CocktailLab:
             'flavors': self.cocktail_names_to_tags[self.cocktail_index_to_name[i[0]]]
         } for i in cos_rank]
 
-        # boolean and:
-        if flavor_include:
-            valid_idxs = self.boolean_search_and(flavor_include_vec, matrix)
-            idx_list = valid_idxs
-            # print(f"idx list {idx_list}, rank len before {len(rank_list)}")
-            matrix = matrix[idx_list]
-            rank_list = [
-                i for i in rank_list
-                if self.cocktail_name_to_index[i['name']] in idx_list]
+        # boolean 
+        and_list = self.boolean_search_and(flavor_include_vec, matrix)
+        not_list = self.boolean_search_not(flavor_exclude_vec, matrix)
+        idx_list = list(set(and_list).intersection(set(not_list)))
+        
+        matrix = matrix[idx_list]
+        rank_list = [
+            i for i in rank_list
+            if self.cocktail_name_to_index[i['name']] in idx_list]
 
         # print(drink_name_list)
         print(f"{len(rank_list)} drinks returned")

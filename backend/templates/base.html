@@ -34,6 +34,12 @@
                     id="flavor-include"
                     onkeyup="filterText(event)">
             </div>
+            <div class="input-box" onclick="sendFocus(3)">
+                <img src="{{ url_for('static', filename='images/mag.png') }}" />
+                <input placeholder="Must exclude these flavors"
+                    id="flavor-exclude"
+                    onkeyup="filterText(event)">
+            </div>
             <br>
             <center>Press ENTER to search</center>
             <!-- <div class="input-box" onclick="sendFocus(3)">
@@ -75,7 +81,8 @@
                 fetch("/query?" + new URLSearchParams({
                         flavor_prefs: document.getElementById("flavor-prefs").value,
                         flavor_antiprefs: document.getElementById("flavor-antiprefs").value,
-                        flavor_include: document.getElementById("flavor-include").value
+                        flavor_include: document.getElementById("flavor-include").value,
+                        flavor_exclude: document.getElementById("flavor-exclude").value
                     }).toString())
                     .then((response) => response.json())
                     .then((data) => data.forEach(row => {
