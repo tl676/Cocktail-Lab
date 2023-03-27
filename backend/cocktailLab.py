@@ -59,7 +59,7 @@ class CocktailLab:
     def make_vectorizer(self, binary=False, max_df=1.0, min_df=1, use_stop_words=True):
         """ Returns a TfidfVectorizer object with the above preprocessing properties.
 
-        By default this function returns a tf-idf matrix representation of data. 
+        By default this function returns a tf-idf matrix vectorizer. 
         This can be switched to a binary representation by setting the binary param 
         to True.
 
@@ -77,7 +77,7 @@ class CocktailLab:
             A flag to let sklearn remove common stop words.
 
         Returns:
-        A #doc x #vocab np array
+        A #doc x #vocab np array vectorizer
 
         """
         if binary:
@@ -177,7 +177,7 @@ class CocktailLab:
             if np.sum(combine) == target:
                 retval.append(idx)
         return retval
-    
+
     def boolean_search_not(self, query, doc_by_vocab):
         """ Returns a list of doc indexes that contain none of the query words
 
@@ -259,11 +259,11 @@ class CocktailLab:
             'flavors': self.cocktail_names_to_tags[self.cocktail_index_to_name[i[0]]]
         } for i in cos_rank]
 
-        # boolean 
+        # boolean
         and_list = self.boolean_search_and(flavor_include_vec, matrix)
         not_list = self.boolean_search_not(flavor_exclude_vec, matrix)
         idx_list = list(set(and_list).intersection(set(not_list)))
-        
+
         matrix = matrix[idx_list]
         rank_list = [
             i for i in rank_list
