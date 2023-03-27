@@ -46,6 +46,7 @@ def home():
 
 @app.route("/query")
 def episodes_search():
+    # TODO change from flavor to ingreds
     flavor_prefs = request.args.get("flavor_prefs")
     flavor_antiprefs = request.args.get("flavor_antiprefs")
     flavor_include = request.args.get("flavor_include")
