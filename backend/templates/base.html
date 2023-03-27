@@ -16,10 +16,18 @@
                 <h1 id="google-0-1">0</h1>
                 <h1 id="google-0-2">0</h1>
             </div>
-            <div class="input-box" onclick="sendFocus()">
+            <div class="input-box" onclick="sendFocus(1)">
                 <img src="{{ url_for('static', filename='images/mag.png') }}" />
                 <input placeholder="Preferred flavors" id="flavor-prefs" onkeyup="filterText()">
             </div>
+            <div class="input-box" onclick="sendFocus(2)">
+                <img src="{{ url_for('static', filename='images/mag.png') }}" />
+                <input placeholder="Must include these flavors" id="flavor-include" onkeyup="filterText()">
+            </div>
+            <!-- <div class="input-box" onclick="sendFocus(3)">
+                <img src="{{ url_for('static', filename='images/mag.png') }}" />
+                <input placeholder="Must not include these flavors" id="flavor-exclude" onkeyup="filterText()">
+            </div> -->
         </div>
         <div id="answer-box">
 
@@ -27,6 +35,7 @@
     </div>
 
     <script>
+        var last_focus = 0
         function answerBoxTemplate(title, titleDesc) {
             return `<div class=''>
                 <h3 class='episode-title'>${title}</h3>
@@ -34,15 +43,21 @@
             </div>`
         }
 
-        function sendFocus() {
-            document.getElementById('flavor-prefs').focus()
+        function sendFocus(x) {
+            switch(x) {
+                case 1: document.getElementById('flavor-prefs').focus(); break;
+                case 2: document.getElementById('flavor-include').focus(); break;
+                case 3: document.getElementById('flavor-exclude').focus(); break;
+                default: document.activeElement.blur()
+            }
         }
 
         function filterText() {
             document.getElementById("answer-box").innerHTML = ""
             console.log(document.getElementById("flavor-prefs").value)
             fetch("/query?" + new URLSearchParams({
-                    flavor_prefs: document.getElementById("flavor-prefs").value
+                    flavor_prefs: document.getElementById("flavor-prefs").value,
+                    flavor_include: document.getElementById("flavor-include").value
                 }).toString())
                 .then((response) => response.json())
                 .then((data) => data.forEach(row => {
@@ -50,7 +65,7 @@
                     console.log(row)
                     let tempDiv = document.createElement("div")
                     // tempDiv.innerHTML = answerBoxTemplate(row.title, row.descr)
-                    tempDiv.innerHTML = answerBoxTemplate(row)
+                    tempDiv.innerHTML = answerBoxTemplate(row.name, row.flavors)
                     document.getElementById("answer-box").appendChild(tempDiv)
                 }));
 

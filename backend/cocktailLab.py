@@ -6,23 +6,25 @@ import csv
 class CocktailLab:
     def __init__(self):
         # Initialize tfidf
-        self.tags_data = self.read_file('data/cocktail_tags.csv')
+        self.cocktail_names_to_tags = self.read_file('data/cocktail_tags.csv')
 
-        self.num_cocktails = len(self.tags_data)
+        self.num_cocktails = len(self.cocktail_names_to_tags)
 
         self.cocktail_name_to_index = {
-            name: index for index, name in enumerate(self.tags_data.keys())
+            name: index for index, name in
+            enumerate(self.cocktail_names_to_tags.keys())
         }
 
         self.cocktail_index_to_name = {
             v: k for k, v in self.cocktail_name_to_index.items()}
 
-        self.cocktail_names = self.tags_data.keys()
+        self.cocktail_names = self.cocktail_names_to_tags.keys()
 
         self.tags_tfidf_vectorizer = self.make_vectorizer()
 
-        tags = [self.tags_data[cocktail] for cocktail in self.tags_data]
-        self.tags_tfidf_matrix = self.tags_tfidf_vectorizer.fit_transform(
+        tags = [self.cocktail_names_to_tags[cocktail] for cocktail in
+                self.cocktail_names_to_tags]
+        self.tags_doc_by_vocab = self.tags_tfidf_vectorizer.fit_transform(
             tags).toarray()
         self.index_to_vocab = {i: v for i, v in enumerate(
             self.tags_tfidf_vectorizer.get_feature_names())}
@@ -145,16 +147,7 @@ class CocktailLab:
             retval.append([d, sim])
         return list(sorted(retval, reverse=True, key=lambda x: x[1]))
 
-    def cos_query(self, query):
-        q = self.make_query([word.strip().lower() for word in query.split(",")], 
-                            self.tags_tfidf_vectorizer,
-                            self.tags_tfidf_matrix)
-        rank_list = self.cos_rank(q, self.tags_tfidf_matrix)
-        drink_name_list = [self.cocktail_index_to_name[i[0]] for i in rank_list]
-        # print(drink_name_list)
-        return drink_name_list
-
-    def boolean_search(self, query, doc_by_vocab):
+    def boolean_search_and(self, query, doc_by_vocab):
         """ Returns a list of doc indexes that contain all the query words
 
         Params:
@@ -175,6 +168,57 @@ class CocktailLab:
             if np.sum(combine) == target:
                 retval.append(d)
         return retval
+
+    def query(self, flavor_prefs, flavor_include=None, flavor_exclude=None):
+        print(f"prefs:{flavor_prefs} include:{flavor_include}")
+
+        matrix = self.tags_doc_by_vocab
+        rank_list = []
+        idx_list = []
+
+        flavor_prefs_vec = self.make_query([word.strip().lower()
+                                            for word in flavor_prefs.split(",")],
+                                           self.tags_tfidf_vectorizer,
+                                           matrix)
+        
+        flavor_include_vec = self.make_query([word.strip().lower()
+                                              for word in flavor_include.split(",")],
+                                             self.tags_tfidf_vectorizer,
+                                             matrix)
+
+        # cosine sim:
+        if flavor_prefs:
+            cos_rank = self.cos_rank(flavor_prefs_vec, matrix)
+            rank_list = [{
+                'name': self.cocktail_index_to_name[i[0]],
+                'flavors': self.cocktail_names_to_tags[self.cocktail_index_to_name[i[0]]]
+            } for i in cos_rank]
+        else:
+            cos_rank = self.cos_rank(
+                self.make_query(self.tags_tfidf_vectorizer.get_feature_names(),
+                                self.tags_tfidf_vectorizer,
+                                matrix),
+                matrix)
+            rank_list = [{
+                'name': self.cocktail_index_to_name[i[0]],
+                'flavors': self.cocktail_names_to_tags[self.cocktail_index_to_name[i[0]]]
+            } for i in cos_rank]
+
+        # boolean and:
+        if flavor_include:
+            valid_idxs = self.boolean_search_and(flavor_include_vec, matrix)
+            idx_list = valid_idxs
+            print(f"idx list {idx_list}, rank len before {len(rank_list)}")
+            matrix = matrix[idx_list]
+            rank_list = [
+                i for i in rank_list if self.cocktail_name_to_index[i['name']] in idx_list]
+
+        # if q == -1:
+        #     return ['Please enter proper input']
+
+        # print(drink_name_list)
+        print(f"{len(rank_list)} drinks returned")
+        return rank_list
 
 
 if __name__ == "__main__":
