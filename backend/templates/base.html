@@ -3,8 +3,7 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link
-    href="https://fonts.googleapis.com/css2?family=Kanit&family=Montserrat&family=Open+Sans:wght@500&display=swap"
+<link href="https://fonts.googleapis.com/css2?family=Kanit&family=Montserrat&family=Open+Sans:wght@500&display=swap"
     rel="stylesheet">
 
 <body>
@@ -12,33 +11,29 @@
         <div class="top-text">
             <div class="google-colors">
                 <h1 id="google-c">C</h1>
-                <h1 id="google-s">S</h1>
-                <h1 id="google-4">4</h1>
-                <h1 id="google-3">3</h1>
-                <h1 id="google-0-1">0</h1>
-                <h1 id="google-0-2">0</h1>
+                <h1 id="google-o">O</h1>
+                <h1 id="google-c">C</h1>
+                <h1 id="google-k">K</h1>
+                <h1 id="google-t">T</h1>
+                <h1 id="google-a">A</h1>
+                <h1 id="google-I">I</h1>
+                <h1 id="google-L">L</h1>
             </div>
             <div class="input-box" onclick="sendFocus(1)">
                 <img src="{{ url_for('static', filename='images/mag.png') }}" />
-                <input placeholder="Flavor likes" id="flavor-prefs"
-                    onkeyup="filterText(event)">
+                <input placeholder="Flavor likes" id="flavor-prefs" onkeyup="filterText(event)">
             </div>
             <div class="input-box" onclick="sendFocus(4)">
                 <img src="{{ url_for('static', filename='images/mag.png') }}" />
-                <input placeholder="Flavor dislikes" id="flavor-antiprefs"
-                    onkeyup="filterText(event)">
+                <input placeholder="Flavor dislikes" id="flavor-antiprefs" onkeyup="filterText(event)">
             </div>
             <div class="input-box" onclick="sendFocus(2)">
                 <img src="{{ url_for('static', filename='images/mag.png') }}" />
-                <input placeholder="Must include these flavors"
-                    id="flavor-include"
-                    onkeyup="filterText(event)">
+                <input placeholder="Must include these flavors" id="flavor-include" onkeyup="filterText(event)">
             </div>
             <div class="input-box" onclick="sendFocus(3)">
                 <img src="{{ url_for('static', filename='images/mag.png') }}" />
-                <input placeholder="Must exclude these flavors"
-                    id="flavor-exclude"
-                    onkeyup="filterText(event)">
+                <input placeholder="Must exclude these flavors" id="flavor-exclude" onkeyup="filterText(event)">
             </div>
             <br>
             <center>Press ENTER to search</center>
@@ -60,11 +55,11 @@
                 <p class='episode-desc'>${titleDesc}</p>
             </div>`
         }
-        
+
         function sendFocus(x) {
             // i feel like this is spaghetti. this feels very stupid to me. unfortunately idk
             // if theres a better way to do this 🤪
-            switch(x) {
+            switch (x) {
                 case 1: document.getElementById('flavor-prefs').focus(); break;
                 case 2: document.getElementById('flavor-include').focus(); break;
                 case 3: document.getElementById('flavor-exclude').focus(); break;
@@ -75,15 +70,15 @@
 
         function filterText(event) {
             // only search on ENTER because it's buggy without it
-            if(event.keyCode == 13) {
+            if (event.keyCode == 13) {
                 document.getElementById("answer-box").innerHTML = ""
                 console.log(document.getElementById("flavor-prefs").value)
                 fetch("/query?" + new URLSearchParams({
-                        flavor_prefs: document.getElementById("flavor-prefs").value,
-                        flavor_antiprefs: document.getElementById("flavor-antiprefs").value,
-                        flavor_include: document.getElementById("flavor-include").value,
-                        flavor_exclude: document.getElementById("flavor-exclude").value
-                    }).toString())
+                    flavor_prefs: document.getElementById("flavor-prefs").value,
+                    flavor_antiprefs: document.getElementById("flavor-antiprefs").value,
+                    flavor_include: document.getElementById("flavor-include").value,
+                    flavor_exclude: document.getElementById("flavor-exclude").value
+                }).toString())
                     .then((response) => response.json())
                     .then((data) => data.forEach(row => {
                         console.log(data)
@@ -95,6 +90,6 @@
                     }));
             }
         }
-        
+
     </script>
 </body>
