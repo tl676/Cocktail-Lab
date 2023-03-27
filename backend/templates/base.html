@@ -68,23 +68,24 @@
         }
 
         function filterText(event) {
+            // only search on ENTER because it's buggy without it
             if(event.keyCode == 13) {
-            document.getElementById("answer-box").innerHTML = ""
-            console.log(document.getElementById("flavor-prefs").value)
-            fetch("/query?" + new URLSearchParams({
-                    flavor_prefs: document.getElementById("flavor-prefs").value,
-                    flavor_antiprefs: document.getElementById("flavor-antiprefs").value,
-                    flavor_include: document.getElementById("flavor-include").value
-                }).toString())
-                .then((response) => response.json())
-                .then((data) => data.forEach(row => {
-                    console.log(data)
-                    console.log(row)
-                    let tempDiv = document.createElement("div")
-                    // tempDiv.innerHTML = answerBoxTemplate(row.title, row.descr)
-                    tempDiv.innerHTML = answerBoxTemplate(row.name, row.flavors)
-                    document.getElementById("answer-box").appendChild(tempDiv)
-                }));
+                document.getElementById("answer-box").innerHTML = ""
+                console.log(document.getElementById("flavor-prefs").value)
+                fetch("/query?" + new URLSearchParams({
+                        flavor_prefs: document.getElementById("flavor-prefs").value,
+                        flavor_antiprefs: document.getElementById("flavor-antiprefs").value,
+                        flavor_include: document.getElementById("flavor-include").value
+                    }).toString())
+                    .then((response) => response.json())
+                    .then((data) => data.forEach(row => {
+                        console.log(data)
+                        console.log(row)
+                        let tempDiv = document.createElement("div")
+                        // tempDiv.innerHTML = answerBoxTemplate(row.title, row.descr)
+                        tempDiv.innerHTML = answerBoxTemplate(row.name, row.flavors)
+                        document.getElementById("answer-box").appendChild(tempDiv)
+                    }));
             }
         }
         

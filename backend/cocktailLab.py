@@ -5,27 +5,36 @@ import csv
 
 class CocktailLab:
     def __init__(self):
-        # Initialize tfidf
+        """Dictionary of {drink name: tags}"""
         self.cocktail_names_to_tags = self.read_file('data/cocktail_tags.csv')
 
+        """Number of cocktails"""
         self.num_cocktails = len(self.cocktail_names_to_tags)
 
+        """Dictionary of {cocktail name: index}"""
         self.cocktail_name_to_index = {
             name: index for index, name in
             enumerate(self.cocktail_names_to_tags.keys())
         }
 
+        """Dictionary of index: cocktail name"""
         self.cocktail_index_to_name = {
             v: k for k, v in self.cocktail_name_to_index.items()}
 
+        """List of cocktail names"""
         self.cocktail_names = self.cocktail_names_to_tags.keys()
 
+        """The sklearn TfidfVectorizer object"""
         self.tags_tfidf_vectorizer = self.make_vectorizer(binary=True)
 
         tags = [self.cocktail_names_to_tags[cocktail] for cocktail in
                 self.cocktail_names_to_tags]
+
+        """The term-document matrix"""
         self.tags_doc_by_vocab = self.tags_tfidf_vectorizer.fit_transform(
             tags).toarray()
+
+        """Dictionary of {index: token}"""
         self.index_to_vocab = {i: v for i, v in enumerate(
             self.tags_tfidf_vectorizer.get_feature_names())}
 
@@ -172,42 +181,51 @@ class CocktailLab:
         return retval
 
     def query(self, flavor_prefs=None, flavor_antiprefs=None, flavor_include=None, flavor_exclude=None):
-        print(
-            f"prefs:{flavor_prefs} antiprefs:{flavor_antiprefs} include:{flavor_include}")
+        print(f"""prefs:{flavor_prefs}
+        antiprefs:{flavor_antiprefs}
+        include:{flavor_include}
+        exclude:{flavor_exclude}""")
 
         # initialize variables
         matrix = self.tags_doc_by_vocab
+        # [{'name': "cocktail name", 'flavors': 'cocktail flavors'}]
         rank_list = None
+        # the list of indices to return (used by boolean and/not)
         idx_list = None
-        # vector of 0s:
-        flavor_prefs_vec = self.make_query([""],
-                                           self.tags_tfidf_vectorizer,
-                                           matrix)
-        # vector of 0s:
-        flavor_antiprefs_vec = self.make_query([""],
-                                               self.tags_tfidf_vectorizer,
-                                               matrix)
+        # initialize as vector of 0s:
+        flavor_prefs_vec = self.make_query(
+            [""], self.tags_tfidf_vectorizer, matrix)
+        # initialize as vector of 0s:
+        flavor_antiprefs_vec = self.make_query(
+            [""], self.tags_tfidf_vectorizer, matrix)
         flavor_include_vec = None
         cos_rank = None
 
-        # vectorize inputs
+        # vectorize inputs, if necessry
         if flavor_prefs:
-            flavor_prefs_vec = self.make_query([word.strip().lower()
-                                                for word in flavor_prefs.split(",")],
-                                               self.tags_tfidf_vectorizer,
-                                               matrix)
+            flavor_prefs_vec = self.make_query(
+                [word.strip().lower()
+                 for word in flavor_prefs.split(",")],
+                self.tags_tfidf_vectorizer,
+                matrix)
 
         if flavor_antiprefs:
-            flavor_antiprefs_vec = -1 * self.make_query([word.strip().lower()
-                                                         for word in flavor_antiprefs.split(",")],
-                                                        self.tags_tfidf_vectorizer,
-                                                        matrix)
+            # set the antipref flavors as -1
+            flavor_antiprefs_vec = -1 * self.make_query(
+                [word.strip().lower()
+                 for word in flavor_antiprefs.split(",")],
+                self.tags_tfidf_vectorizer,
+                matrix)
 
         if flavor_include:
-            flavor_include_vec = self.make_query([word.strip().lower()
-                                                  for word in flavor_include.split(",")],
-                                                 self.tags_tfidf_vectorizer,
-                                                 matrix)
+            flavor_include_vec = self.make_query(
+                [word.strip().lower()
+                 for word in flavor_include.split(",")],
+                self.tags_tfidf_vectorizer,
+                matrix)
+
+        if flavor_exclude:
+            pass  # TODO
 
         # cosine sim:
         cos_rank = self.cos_rank(
@@ -232,6 +250,6 @@ class CocktailLab:
         return rank_list
 
 
-# here for testing purposes
+# here for testing purposes (run $ python cocktailLab.py)
 if __name__ == "__main__":
     cocktail = CocktailLab()
