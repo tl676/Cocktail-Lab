@@ -52,6 +52,6 @@ def episodes_search():
     flavor_include = request.args.get("flavor_include")
     flavor_exclude = request.args.get("flavor_exclude")
     
-    return json.dumps(cocktailLab.query(flavor_prefs, flavor_antiprefs, flavor_include, flavor_exclude))
+    return json.dumps(cocktailLab.query(flavor_prefs, flavor_antiprefs, flavor_include, flavor_exclude)[:10])
 
 # app.run(debug=True)
