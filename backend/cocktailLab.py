@@ -192,7 +192,6 @@ class CocktailLab:
             none of the query words.
         """
         retval = []
-        target = np.sum(query)
         for idx, doc in enumerate(doc_by_vocab):
             combine = np.logical_and(query, doc)
             if np.sum(combine) == 0:
