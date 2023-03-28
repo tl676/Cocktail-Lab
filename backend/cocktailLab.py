@@ -6,15 +6,15 @@ import csv
 class CocktailLab:
     def __init__(self):
         """Dictionary of {drink name: tags}"""
-        self.cocktail_names_to_tags = self.read_file('data/cocktail_tags.csv')
+        self.cocktail_names_to_ingreds = self.read_file('data/cocktails_ingredients.csv')
 
         """Number of cocktails"""
-        self.num_cocktails = len(self.cocktail_names_to_tags)
+        self.num_cocktails = len(self.cocktail_names_to_ingreds)
 
         """Dictionary of {cocktail name: index}"""
         self.cocktail_name_to_index = {
             name: index for index, name in
-            enumerate(self.cocktail_names_to_tags.keys())
+            enumerate(self.cocktail_names_to_ingreds.keys())
         }
 
         """Dictionary of index: cocktail name"""
@@ -22,30 +22,30 @@ class CocktailLab:
             v: k for k, v in self.cocktail_name_to_index.items()}
 
         """List of cocktail names"""
-        self.cocktail_names = self.cocktail_names_to_tags.keys()
+        self.cocktail_names = self.cocktail_names_to_ingreds.keys()
 
         """The sklearn TfidfVectorizer object"""
-        self.tags_tfidf_vectorizer = self.make_vectorizer(binary=True)
+        self.ingreds_tfidf_vectorizer = self.make_vectorizer(binary=True)
 
-        tags = [self.cocktail_names_to_tags[cocktail] for cocktail in
-                self.cocktail_names_to_tags]
+        ingreds = [self.cocktail_names_to_ingreds[cocktail] for cocktail in
+                self.cocktail_names_to_ingreds]
 
         """The term-document matrix"""
-        self.tags_doc_by_vocab = self.tags_tfidf_vectorizer.fit_transform(
-            tags).toarray()
+        self.ingreds_doc_by_vocab = self.ingreds_tfidf_vectorizer.fit_transform(
+            ingreds).toarray()
 
         """Dictionary of {index: token}"""
         self.index_to_vocab = {i: v for i, v in enumerate(
-            self.tags_tfidf_vectorizer.get_feature_names())}
+            self.ingreds_tfidf_vectorizer.get_feature_names())}
 
     def read_file(self, file):
         """ Returns a dictionary of format {'cocktail name' : 'tag1,tag2'}
         Parameters:
         file: name of file
 
-        ***Note: CURRENTLY CONFIGURED FOR COCKTAIL_TAGS.CSV***
+        ***Note: CURRENTLY CONFIGURED FOR COCKTAIL_INGREDIENTS.CSV***
         """
-        with open(file) as csv_file:
+        with open(file, encoding="utf8") as csv_file:
             csv_reader = csv.reader(csv_file, delimiter=',')
             line_count = 0
             out = {}
@@ -53,7 +53,7 @@ class CocktailLab:
                 if line_count == 0:
                     line_count += 1
                 else:
-                    out[row[1].lower()] = row[2].lower()
+                    out[row[0].lower()] = row[3].lower()
         return out
 
     def make_vectorizer(self, binary=False, max_df=1.0, min_df=1, use_stop_words=True):
@@ -206,17 +206,17 @@ class CocktailLab:
         exclude:{flavor_exclude}""")
 
         # initialize variables
-        matrix = self.tags_doc_by_vocab
+        matrix = self.ingreds_doc_by_vocab
         # [{'name': "cocktail name", 'flavors': 'cocktail flavors'}]
         rank_list = None
         # the list of indices to return (used by boolean and/not)
         idx_list = None
         # initialize as vector of 0s:
         flavor_prefs_vec = self.make_query(
-            [""], self.tags_tfidf_vectorizer, matrix)
+            [""], self.ingreds_tfidf_vectorizer, matrix)
         # initialize as vector of 0s:
         flavor_antiprefs_vec = self.make_query(
-            [""], self.tags_tfidf_vectorizer, matrix)
+            [""], self.ingreds_tfidf_vectorizer, matrix)
         flavor_include_vec = np.zeros(len(self.index_to_vocab))
         flavor_exclude_vec = np.zeros(len(self.index_to_vocab))
         cos_rank = None
@@ -226,7 +226,7 @@ class CocktailLab:
             flavor_prefs_vec = self.make_query(
                 [word.strip().lower()
                  for word in flavor_prefs.split(",")],
-                self.tags_tfidf_vectorizer,
+                self.ingreds_tfidf_vectorizer,
                 matrix)
 
         if flavor_antiprefs:
@@ -234,21 +234,21 @@ class CocktailLab:
             flavor_antiprefs_vec = -1 * self.make_query(
                 [word.strip().lower()
                  for word in flavor_antiprefs.split(",")],
-                self.tags_tfidf_vectorizer,
+                self.ingreds_tfidf_vectorizer,
                 matrix)
 
         if flavor_include:
             flavor_include_vec = self.make_query(
                 [word.strip().lower()
                  for word in flavor_include.split(",")],
-                self.tags_tfidf_vectorizer,
+                self.ingreds_tfidf_vectorizer,
                 matrix)
 
         if flavor_exclude:
             flavor_exclude_vec = self.make_query(
                 [word.strip().lower()
                  for word in flavor_exclude.split(",")],
-                self.tags_tfidf_vectorizer,
+                self.ingreds_tfidf_vectorizer,
                 matrix)
 
         # cosine sim:
@@ -256,7 +256,7 @@ class CocktailLab:
             flavor_prefs_vec + flavor_antiprefs_vec, matrix)
         rank_list = [{
             'name': self.cocktail_index_to_name[i[0]],
-            'flavors': self.cocktail_names_to_tags[self.cocktail_index_to_name[i[0]]]
+            'flavors': self.cocktail_names_to_ingreds[self.cocktail_index_to_name[i[0]]]
         } for i in cos_rank]
 
         # boolean

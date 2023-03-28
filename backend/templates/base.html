@@ -23,21 +23,22 @@
                 <h1 id="google-a-2">A</h1>
                 <h1 id="google-b">B</h1>
             </div>
+            <!-- TODO change from flavor to ingredients -->
             <div class="input-box" onclick="sendFocus(1)">
                 <img src="{{ url_for('static', filename='images/mag.png') }}" />
-                <input placeholder="Flavor likes" id="flavor-prefs" onkeyup="filterText(event)">
+                <input placeholder="Ingredient likes" id="flavor-prefs" onkeyup="filterText(event)">
             </div>
             <div class="input-box" onclick="sendFocus(4)">
                 <img src="{{ url_for('static', filename='images/mag.png') }}" />
-                <input placeholder="Flavor dislikes" id="flavor-antiprefs" onkeyup="filterText(event)">
+                <input placeholder="Ingredient dislikes" id="flavor-antiprefs" onkeyup="filterText(event)">
             </div>
             <div class="input-box" onclick="sendFocus(2)">
                 <img src="{{ url_for('static', filename='images/mag.png') }}" />
-                <input placeholder="Must include these flavors" id="flavor-include" onkeyup="filterText(event)">
+                <input placeholder="Must include these ingredients" id="flavor-include" onkeyup="filterText(event)">
             </div>
             <div class="input-box" onclick="sendFocus(3)">
                 <img src="{{ url_for('static', filename='images/mag.png') }}" />
-                <input placeholder="Must exclude these flavors" id="flavor-exclude" onkeyup="filterText(event)">
+                <input placeholder="Must exclude these ingredients" id="flavor-exclude" onkeyup="filterText(event)">
             </div>
             <br>
             <center>Press ENTER to search</center>
@@ -78,6 +79,7 @@
                 document.getElementById("answer-box").innerHTML = ""
                 console.log(document.getElementById("flavor-prefs").value)
                 fetch("/query?" + new URLSearchParams({
+                    // TODO change from flavor to ingreds
                     flavor_prefs: document.getElementById("flavor-prefs").value,
                     flavor_antiprefs: document.getElementById("flavor-antiprefs").value,
                     flavor_include: document.getElementById("flavor-include").value,
