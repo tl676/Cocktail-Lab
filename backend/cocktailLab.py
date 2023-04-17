@@ -31,7 +31,7 @@ class CocktailLab:
         self.ingreds_tfidf_vectorizer = self.make_vectorizer(binary=True)
 
         ingreds = [self.cocktail_names_to_ingreds[cocktail] for cocktail in
-                self.cocktail_names_to_ingreds]
+                   self.cocktail_names_to_ingreds]
 
         """The term-document matrix"""
         self.ingreds_doc_by_vocab = self.ingreds_tfidf_vectorizer.fit_transform(
@@ -115,7 +115,7 @@ class CocktailLab:
 
         tf_mat = TfidfVectorizer(max_df=max_df, min_df=min_df,
                                  stop_words=stop_words, use_idf=use_idf,
-                                 binary=binary, norm=norm)
+                                 binary=binary, norm=norm, analyzer='word', token_pattern='[^,]+')
 
         return tf_mat
 
