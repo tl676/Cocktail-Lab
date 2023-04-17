@@ -46,11 +46,11 @@ def home():
 @app.route("/query")
 def episodes_search():
     # TODO change from flavor to ingreds
-    flavor_prefs = request.args.get("flavor_prefs")
-    flavor_antiprefs = request.args.get("flavor_antiprefs")
-    flavor_include = request.args.get("flavor_include")
-    flavor_exclude = request.args.get("flavor_exclude")
-    
-    return json.dumps(cocktailLab.query(flavor_prefs, flavor_antiprefs, flavor_include, flavor_exclude)[:10])
+    ingred_prefs = request.args.get("ingred_prefs")
+    ingred_antiprefs = request.args.get("ingred_antiprefs")
+    ingred_include = request.args.get("ingred_include")
+    ingred_exclude = request.args.get("ingred_exclude")
+
+    return json.dumps(cocktailLab.query(ingred_prefs, ingred_antiprefs, ingred_include, ingred_exclude)[:10])
 
 # app.run(debug=True)

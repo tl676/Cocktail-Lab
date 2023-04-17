@@ -102,10 +102,14 @@
     margin-top: 50px;
 }
 
-.episode-title {
+.drink {
     font-family: 'Kanit', sans-serif;
 }
 
-.episode-desc {
+.ingreds {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.flavors {
     font-family: 'Montserrat', sans-serif;
 }

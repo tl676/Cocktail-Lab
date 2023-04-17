@@ -23,23 +23,40 @@
                 <h1 id="google-a-2">A</h1>
                 <h1 id="google-b">B</h1>
             </div>
-            <!-- TODO change from flavor to ingredients -->
             <div class="input-box" onclick="sendFocus(1)">
                 <img src="{{ url_for('static', filename='images/mag.png') }}" />
-                <input placeholder="Ingredient likes" id="flavor-prefs" onkeyup="filterText(event)">
+                <input placeholder="Ingredient likes" id="ingred-prefs" onkeyup="filterText(event)">
             </div>
             <div class="input-box" onclick="sendFocus(4)">
                 <img src="{{ url_for('static', filename='images/mag.png') }}" />
-                <input placeholder="Ingredient dislikes" id="flavor-antiprefs" onkeyup="filterText(event)">
+                <input placeholder="Ingredient dislikes" id="ingred-antiprefs" onkeyup="filterText(event)">
             </div>
             <div class="input-box" onclick="sendFocus(2)">
                 <img src="{{ url_for('static', filename='images/mag.png') }}" />
-                <input placeholder="Must include these ingredients" id="flavor-include" onkeyup="filterText(event)">
+                <input placeholder="Must include these ingredients" id="ingred-include" onkeyup="filterText(event)">
             </div>
             <div class="input-box" onclick="sendFocus(3)">
                 <img src="{{ url_for('static', filename='images/mag.png') }}" />
-                <input placeholder="Must exclude these ingredients" id="flavor-exclude" onkeyup="filterText(event)">
+                <input placeholder="Must exclude these ingredients" id="ingred-exclude" onkeyup="filterText(event)">
             </div>
+
+            <div class="input-box" onclick="sendFocus(5)">
+                <img src="{{ url_for('static', filename='images/mag.png') }}" />
+                <input placeholder="Flavor likes" id="flavor-prefs" onkeyup="filterText(event)">
+            </div>
+            <div class="input-box" onclick="sendFocus(6)">
+                <img src="{{ url_for('static', filename='images/mag.png') }}" />
+                <input placeholder="Flavor dislikes" id="flavor-antiprefs" onkeyup="filterText(event)">
+            </div>
+            <div class="input-box" onclick="sendFocus(7)">
+                <img src="{{ url_for('static', filename='images/mag.png') }}" />
+                <input placeholder="Must include these flavors" id="flavor-include" onkeyup="filterText(event)">
+            </div>
+            <div class="input-box" onclick="sendFocus(8)">
+                <img src="{{ url_for('static', filename='images/mag.png') }}" />
+                <input placeholder="Must exclude these flavors" id="flavor-exclude" onkeyup="filterText(event)">
+            </div>
+
             <br>
             <center>Press ENTER to search</center>
             <!-- <div class="input-box" onclick="sendFocus(3)">
@@ -54,10 +71,11 @@
 
     <script>
         var last_focus = 0
-        function answerBoxTemplate(title, titleDesc) {
+        function answerBoxTemplate(drink, ingreds, flavors) {
             return `<div class=''>
-                <h3 class='episode-title'>${title}</h3>
-                <p class='episode-desc'>${titleDesc}</p>
+                <h3 class='drink'>${drink}</h3>
+                <p class='ingreds'>Ingredients: ${ingreds}</p>
+                <p class='flavors'>Flavors: ${flavors}</p>
             </div>`
         }
 
@@ -65,10 +83,15 @@
             // i feel like this is spaghetti. this feels very stupid to me. unfortunately idk
             // if theres a better way to do this 🤪
             switch (x) {
-                case 1: document.getElementById('flavor-prefs').focus(); break;
-                case 2: document.getElementById('flavor-include').focus(); break;
-                case 3: document.getElementById('flavor-exclude').focus(); break;
-                case 4: document.getElementById('flavor-antiprefs').focus(); break;
+                case 1: document.getElementById('ingred-prefs').focus(); break;
+                case 2: document.getElementById('ingred-include').focus(); break;
+                case 3: document.getElementById('ingred-exclude').focus(); break;
+                case 4: document.getElementById('ingred-antiprefs').focus(); break;
+
+                case 5: document.getElementById('flavor-prefs').focus(); break;
+                case 6: document.getElementById('flavor-antiprefs').focus(); break;
+                case 7: document.getElementById('flavor-include').focus(); break;
+                case 8: document.getElementById('flavor-exclude').focus(); break;
                 default: document.activeElement.blur()
             }
         }
@@ -77,21 +100,20 @@
             // only search on ENTER because it's buggy without it
             if (event.keyCode == 13) {
                 document.getElementById("answer-box").innerHTML = ""
-                console.log(document.getElementById("flavor-prefs").value)
+                console.log(document.getElementById("ingred-prefs").value)
                 fetch("/query?" + new URLSearchParams({
                     // TODO change from flavor to ingreds
-                    flavor_prefs: document.getElementById("flavor-prefs").value,
-                    flavor_antiprefs: document.getElementById("flavor-antiprefs").value,
-                    flavor_include: document.getElementById("flavor-include").value,
-                    flavor_exclude: document.getElementById("flavor-exclude").value
+                    ingred_prefs: document.getElementById("ingred-prefs").value + document.getElementById("flavor-prefs").value,
+                    ingred_antiprefs: document.getElementById("ingred-antiprefs").value + document.getElementById("flavor-antiprefs").value,
+                    ingred_include: document.getElementById("ingred-include").value + document.getElementById("flavor-include").value,
+                    ingred_exclude: document.getElementById("ingred-exclude").value + document.getElementById("flavor-exclude").value
                 }).toString())
                     .then((response) => response.json())
                     .then((data) => data.forEach(row => {
                         console.log(data)
                         console.log(row)
                         let tempDiv = document.createElement("div")
-                        // tempDiv.innerHTML = answerBoxTemplate(row.title, row.descr)
-                        tempDiv.innerHTML = answerBoxTemplate(row.name, row.flavors)
+                        tempDiv.innerHTML = answerBoxTemplate(row.name, row.ingredients, row.flavors)
                         document.getElementById("answer-box").appendChild(tempDiv)
                     }));
             }

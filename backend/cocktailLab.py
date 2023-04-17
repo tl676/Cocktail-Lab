@@ -5,8 +5,11 @@ import csv
 
 class CocktailLab:
     def __init__(self):
-        """Dictionary of {drink name: tags}"""
-        self.cocktail_names_to_ingreds = self.read_file('data/cocktails_ingredients.csv')
+        """Dictionary of {drink name: ingredients}"""
+        self.cocktail_names_to_ingreds = self.read_file_ingreds('data/cocktail_flavors_ingreds_combined.csv')
+
+        """Dictionary of {drink name: flavors}"""
+        self.cocktail_names_to_flavors = self.read_file_flavors('data/cocktail_flavors_ingreds_combined.csv')
 
         """Number of cocktails"""
         self.num_cocktails = len(self.cocktail_names_to_ingreds)
@@ -38,12 +41,12 @@ class CocktailLab:
         self.index_to_vocab = {i: v for i, v in enumerate(
             self.ingreds_tfidf_vectorizer.get_feature_names())}
 
-    def read_file(self, file):
-        """ Returns a dictionary of format {'cocktail name' : 'tag1,tag2'}
+    def read_file_ingreds(self, file):
+        """ Returns a dictionary of format {'cocktail name' : 'ingred1,ingred2'}
         Parameters:
         file: name of file
 
-        ***Note: CURRENTLY CONFIGURED FOR COCKTAIL_INGREDIENTS.CSV***
+        ***Note: CURRENTLY CONFIGURED FOR cocktail_flavors_ingreds_combined***
         """
         with open(file, encoding="utf8") as csv_file:
             csv_reader = csv.reader(csv_file, delimiter=',')
@@ -54,6 +57,24 @@ class CocktailLab:
                     line_count += 1
                 else:
                     out[row[0].lower()] = row[3].lower()
+        return out
+    
+    def read_file_flavors(self, file):
+        """ Returns a dictionary of format {'cocktail name' : 'flavor1,flavor2'}
+        Parameters:
+        file: name of file
+
+        ***Note: CURRENTLY CONFIGURED FOR cocktail_flavors_ingreds_combined***
+        """
+        with open(file, encoding="utf8") as csv_file:
+            csv_reader = csv.reader(csv_file, delimiter=',')
+            line_count = 0
+            out = {}
+            for row in csv_reader:
+                if line_count == 0:
+                    line_count += 1
+                else:
+                    out[row[0].lower()] = ', '.join(row[13].lower().split())
         return out
 
     def make_vectorizer(self, binary=False, max_df=1.0, min_df=1, use_stop_words=True):
@@ -198,11 +219,11 @@ class CocktailLab:
                 retval.append(idx)
         return retval
 
-    def query(self, flavor_prefs=None, flavor_antiprefs=None, flavor_include=None, flavor_exclude=None):
-        print(f"""prefs:{flavor_prefs}
-        antiprefs:{flavor_antiprefs}
-        include:{flavor_include}
-        exclude:{flavor_exclude}""")
+    def query(self, ingred_prefs=None, ingred_antiprefs=None, ingred_include=None, ingred_exclude=None):
+        print(f"""prefs:{ingred_prefs}
+        antiprefs:{ingred_antiprefs}
+        include:{ingred_include}
+        exclude:{ingred_exclude}""")
 
         # initialize variables
         matrix = self.ingreds_doc_by_vocab
@@ -221,32 +242,32 @@ class CocktailLab:
         cos_rank = None
 
         # vectorize inputs, if necessry
-        if flavor_prefs:
+        if ingred_prefs:
             flavor_prefs_vec = self.make_query(
                 [word.strip().lower()
-                 for word in flavor_prefs.split(",")],
+                 for word in ingred_prefs.split(",")],
                 self.ingreds_tfidf_vectorizer,
                 matrix)
 
-        if flavor_antiprefs:
+        if ingred_antiprefs:
             # set the antipref flavors as -1
             flavor_antiprefs_vec = -1 * self.make_query(
                 [word.strip().lower()
-                 for word in flavor_antiprefs.split(",")],
+                 for word in ingred_antiprefs.split(",")],
                 self.ingreds_tfidf_vectorizer,
                 matrix)
 
-        if flavor_include:
+        if ingred_include:
             flavor_include_vec = self.make_query(
                 [word.strip().lower()
-                 for word in flavor_include.split(",")],
+                 for word in ingred_include.split(",")],
                 self.ingreds_tfidf_vectorizer,
                 matrix)
 
-        if flavor_exclude:
+        if ingred_exclude:
             flavor_exclude_vec = self.make_query(
                 [word.strip().lower()
-                 for word in flavor_exclude.split(",")],
+                 for word in ingred_exclude.split(",")],
                 self.ingreds_tfidf_vectorizer,
                 matrix)
 
@@ -255,7 +276,8 @@ class CocktailLab:
             flavor_prefs_vec + flavor_antiprefs_vec, matrix)
         rank_list = [{
             'name': self.cocktail_index_to_name[i[0]],
-            'flavors': self.cocktail_names_to_ingreds[self.cocktail_index_to_name[i[0]]]
+            'ingredients': self.cocktail_names_to_ingreds[self.cocktail_index_to_name[i[0]]],
+            'flavors': self.cocktail_names_to_flavors[self.cocktail_index_to_name[i[0]]]
         } for i in cos_rank]
 
         # boolean
@@ -270,6 +292,7 @@ class CocktailLab:
 
         # print(drink_name_list)
         print(f"{len(rank_list)} drinks returned")
+        print(rank_list[0])
         return rank_list
 
 
