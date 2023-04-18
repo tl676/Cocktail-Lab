@@ -51,6 +51,6 @@ def episodes_search():
     ingred_include = request.args.get("ingred_include")
     ingred_exclude = request.args.get("ingred_exclude")
 
-    return json.dumps(cocktailLab.query(ingred_prefs, ingred_antiprefs, ingred_include, ingred_exclude)[:10])
+    return json.dumps(cocktailLab.query(ingred_prefs, ingred_antiprefs, ingred_include, ingred_exclude))
 
 # app.run(debug=True)

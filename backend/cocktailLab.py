@@ -11,6 +11,9 @@ class CocktailLab:
         """Dictionary of {drink name: flavors}"""
         self.cocktail_names_to_flavors = self.read_file_flavors('data/cocktail_flavors_ingreds_combined.csv')
 
+        """Dictionary of {drink name: popularity}"""
+        self.cocktail_names_to_popularity = self.read_file_popularity('data/cocktail_flavors_popularity.csv')
+
         """Number of cocktails"""
         self.num_cocktails = len(self.cocktail_names_to_ingreds)
 
@@ -30,12 +33,12 @@ class CocktailLab:
         """The sklearn TfidfVectorizer object"""
         self.ingreds_tfidf_vectorizer = self.make_vectorizer(binary=True)
 
-        ingreds = [self.cocktail_names_to_ingreds[cocktail] for cocktail in
+        self.ingreds = [self.cocktail_names_to_ingreds[cocktail] for cocktail in
                    self.cocktail_names_to_ingreds]
 
         """The term-document matrix"""
         self.ingreds_doc_by_vocab = self.ingreds_tfidf_vectorizer.fit_transform(
-            ingreds).toarray()
+            self.ingreds).toarray()
 
         """Dictionary of {index: token}"""
         self.index_to_vocab = {i: v for i, v in enumerate(
@@ -56,7 +59,7 @@ class CocktailLab:
                 if line_count == 0:
                     line_count += 1
                 else:
-                    out[row[0].lower()] = row[3].lower()
+                    out[row[0].lower()] = row[12].lower()
         return out
     
     def read_file_flavors(self, file):
@@ -75,6 +78,23 @@ class CocktailLab:
                     line_count += 1
                 else:
                     out[row[0].lower()] = ', '.join(row[13].lower().split())
+        return out
+    
+    def read_file_popularity(self, file):
+        """ Returns a dictionary of format {'cocktail name' : 'flavor1,flavor2'}
+        Parameters:
+        file: name of file
+
+        """
+        with open(file, encoding="utf8") as csv_file:
+            csv_reader = csv.reader(csv_file, delimiter=',')
+            line_count = 0
+            out = {}
+            for row in csv_reader:
+                if line_count == 0:
+                    line_count += 1
+                else:
+                    out[row[0].lower()] = row[11]
         return out
 
     def make_vectorizer(self, binary=False, max_df=1.0, min_df=1, use_stop_words=True):
@@ -115,7 +135,9 @@ class CocktailLab:
 
         tf_mat = TfidfVectorizer(max_df=max_df, min_df=min_df,
                                  stop_words=stop_words, use_idf=use_idf,
-                                 binary=binary, norm=norm, analyzer='word', token_pattern='[^,]+')
+                                 binary=binary, norm=norm, 
+                                 analyzer='word', token_pattern='[^,]+'
+                                 )
 
         return tf_mat
 
@@ -139,7 +161,6 @@ class CocktailLab:
                 retval[ind] = 1
             except:
                 # token not in matrix
-                # TODO figure this out??
                 continue
         return retval
 
@@ -175,8 +196,18 @@ class CocktailLab:
         for d in range(len(doc_by_vocab)):
             doc = doc_by_vocab[d]
             sim = self.cos_sim(query, doc)
+            # adjust by popularity
+            sim += self.popularity_boost(self.cocktail_index_to_name[d]) * 0.2
             retval.append([d, sim])
         return list(sorted(retval, reverse=True, key=lambda x: x[1]))
+    
+    def popularity_boost(self, cocktail_name):
+        """ Returns popularity boost amount for the cocktail, ranging from 0
+        (least popular) to 1 (most popular)
+        """
+        if self.cocktail_names_to_popularity[cocktail_name] == "":
+            return 0
+        return 1 - (int(self.cocktail_names_to_popularity[cocktail_name]) - 5397) / 1576
 
     def boolean_search_and(self, query, doc_by_vocab):
         """ Returns a list of doc indexes that contain all the query words
@@ -277,7 +308,7 @@ class CocktailLab:
         rank_list = [{
             'name': self.cocktail_index_to_name[i[0]],
             'ingredients': self.cocktail_names_to_ingreds[self.cocktail_index_to_name[i[0]]],
-            'flavors': self.cocktail_names_to_flavors[self.cocktail_index_to_name[i[0]]]
+            'flavors': self.cocktail_names_to_flavors[self.cocktail_index_to_name[i[0]]][1:]
         } for i in cos_rank]
 
         # boolean
@@ -292,10 +323,10 @@ class CocktailLab:
 
         # print(drink_name_list)
         print(f"{len(rank_list)} drinks returned")
-        print(rank_list[0])
-        return rank_list
+        return rank_list[:10]
 
 
 # here for testing purposes (run $ python cocktailLab.py)
 if __name__ == "__main__":
     cocktail = CocktailLab()
+    print("citrus" in cocktail.ingreds_tfidf_vectorizer.get_feature_names())
