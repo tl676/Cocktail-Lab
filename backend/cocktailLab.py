@@ -8,6 +8,8 @@ class CocktailLab:
         """Dictionary of {drink name: ingredients}"""
         self.cocktail_names_to_ingreds = self.read_file_ingreds('data/cocktail_flavors_ingreds_combined.csv')
 
+        self.cocktail_names_to_ingreds_only = self.read_file_ingreds('data/cocktail_flavors_ingreds_combined.csv', ingreds_only=True)
+
         """Dictionary of {drink name: flavors}"""
         self.cocktail_names_to_flavors = self.read_file_flavors('data/cocktail_flavors_ingreds_combined.csv')
 
@@ -44,7 +46,7 @@ class CocktailLab:
         self.index_to_vocab = {i: v for i, v in enumerate(
             self.ingreds_tfidf_vectorizer.get_feature_names())}
 
-    def read_file_ingreds(self, file):
+    def read_file_ingreds(self, file, ingreds_only=False):
         """ Returns a dictionary of format {'cocktail name' : 'ingred1,ingred2'}
         Parameters:
         file: name of file
@@ -59,7 +61,10 @@ class CocktailLab:
                 if line_count == 0:
                     line_count += 1
                 else:
-                    out[row[0].lower()] = row[12].lower()
+                    if ingreds_only:
+                        out[row[0].lower()] = row[3].lower()
+                    else:
+                        out[row[0].lower()] = row[12].lower()
         return out
     
     def read_file_flavors(self, file):
@@ -136,7 +141,7 @@ class CocktailLab:
         tf_mat = TfidfVectorizer(max_df=max_df, min_df=min_df,
                                  stop_words=stop_words, use_idf=use_idf,
                                  binary=binary, norm=norm, 
-                                 analyzer='word', token_pattern='[^,]+'
+                                #  analyzer='word', token_pattern='[^,]+'
                                  )
 
         return tf_mat
@@ -307,7 +312,7 @@ class CocktailLab:
             flavor_prefs_vec + flavor_antiprefs_vec, matrix)
         rank_list = [{
             'name': self.cocktail_index_to_name[i[0]],
-            'ingredients': self.cocktail_names_to_ingreds[self.cocktail_index_to_name[i[0]]],
+            'ingredients': self.cocktail_names_to_ingreds_only[self.cocktail_index_to_name[i[0]]],
             'flavors': self.cocktail_names_to_flavors[self.cocktail_index_to_name[i[0]]][1:]
         } for i in cos_rank]
 
@@ -323,7 +328,7 @@ class CocktailLab:
 
         # print(drink_name_list)
         print(f"{len(rank_list)} drinks returned")
-        return rank_list[:10]
+        return rank_list
 
 
 # here for testing purposes (run $ python cocktailLab.py)
