@@ -6,15 +6,19 @@ import csv
 class CocktailLab:
     def __init__(self):
         """Dictionary of {drink name: ingredients}"""
-        self.cocktail_names_to_ingreds = self.read_file_ingreds('data/cocktail_flavors_ingreds_combined.csv')
+        self.cocktail_names_to_ingreds = self.read_file_ingreds(
+            'data/cocktail_flavors_ingreds_combined_denumbered.csv')
 
-        self.cocktail_names_to_ingreds_only = self.read_file_ingreds('data/cocktail_flavors_ingreds_combined.csv', ingreds_only=True)
+        self.cocktail_names_to_ingreds_only = self.read_file_ingreds(
+            'data/cocktail_flavors_ingreds_combined_denumbered.csv', ingreds_only=True)
 
         """Dictionary of {drink name: flavors}"""
-        self.cocktail_names_to_flavors = self.read_file_flavors('data/cocktail_flavors_ingreds_combined.csv')
+        self.cocktail_names_to_flavors = self.read_file_flavors(
+            'data/cocktail_flavors_ingreds_combined_denumbered.csv')
 
         """Dictionary of {drink name: popularity}"""
-        self.cocktail_names_to_popularity = self.read_file_popularity('data/cocktail_flavors_popularity.csv')
+        self.cocktail_names_to_popularity = self.read_file_popularity(
+            'data/cocktail_flavors_popularity_denumbered.csv')
 
         """Number of cocktails"""
         self.num_cocktails = len(self.cocktail_names_to_ingreds)
@@ -36,7 +40,7 @@ class CocktailLab:
         self.ingreds_tfidf_vectorizer = self.make_vectorizer(binary=True)
 
         self.ingreds = [self.cocktail_names_to_ingreds[cocktail] for cocktail in
-                   self.cocktail_names_to_ingreds]
+                        self.cocktail_names_to_ingreds]
 
         """The term-document matrix"""
         self.ingreds_doc_by_vocab = self.ingreds_tfidf_vectorizer.fit_transform(
@@ -66,7 +70,7 @@ class CocktailLab:
                     else:
                         out[row[0].lower()] = row[12].lower()
         return out
-    
+
     def read_file_flavors(self, file):
         """ Returns a dictionary of format {'cocktail name' : 'flavor1,flavor2'}
         Parameters:
@@ -84,7 +88,7 @@ class CocktailLab:
                 else:
                     out[row[0].lower()] = ', '.join(row[13].lower().split())
         return out
-    
+
     def read_file_popularity(self, file):
         """ Returns a dictionary of format {'cocktail name' : 'flavor1,flavor2'}
         Parameters:
@@ -140,8 +144,8 @@ class CocktailLab:
 
         tf_mat = TfidfVectorizer(max_df=max_df, min_df=min_df,
                                  stop_words=stop_words, use_idf=use_idf,
-                                 binary=binary, norm=norm, 
-                                #  analyzer='word', token_pattern='[^,]+'
+                                 binary=binary, norm=norm,
+                                 #  analyzer='word', token_pattern='[^,]+'
                                  )
 
         return tf_mat
@@ -205,7 +209,7 @@ class CocktailLab:
             sim += self.popularity_boost(self.cocktail_index_to_name[d]) * 0.2
             retval.append([d, sim])
         return list(sorted(retval, reverse=True, key=lambda x: x[1]))
-    
+
     def popularity_boost(self, cocktail_name):
         """ Returns popularity boost amount for the cocktail, ranging from 0
         (least popular) to 1 (most popular)

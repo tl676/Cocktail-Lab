@@ -1,11 +1,11 @@
 import csv
 import re
 
-raise Exception('MAKE SURE YOU SET UP AN OUTPUT FILE')
+raise Exception('MAKE SURE YOU SET UP THE INPUT AND OUTPUT FILEs')
 
 with open(
-    ".\data\cocktail_flavors_ingreds_combined.csv", newline="", encoding="utf8"
-) as infile, open("./data/test.csv", "w", newline="", encoding="utf8") as outfile:  # change 'test.csv' to output file
+    ".\data\________.csv", newline="", encoding="utf8"
+) as infile, open("./data/_______.csv", "w", newline="", encoding="utf8") as outfile:
     reader = csv.reader(infile, delimiter=",")
     writer = csv.writer(outfile, delimiter=",")
     for row in reader:
