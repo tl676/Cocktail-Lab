@@ -145,7 +145,7 @@ class CocktailLab:
         tf_mat = TfidfVectorizer(max_df=max_df, min_df=min_df,
                                  stop_words=stop_words, use_idf=use_idf,
                                  binary=binary, norm=norm,
-                                 #  analyzer='word', token_pattern='[^,]+'
+                                 analyzer='word', token_pattern='[^,]+'
                                  )
 
         return tf_mat
