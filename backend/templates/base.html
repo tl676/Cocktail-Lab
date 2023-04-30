@@ -78,11 +78,12 @@
 
     <script>
         var last_focus = 0
-        function answerBoxTemplate(drink, ingreds, flavors) {
+        function answerBoxTemplate(drink, ingreds, flavors, popularity) {
             return `<div class=''>
                 <h4 class='drink'>${drink}</h4>
                 <p class='ingreds'>Ingredients: ${ingreds}</p>
                 <p class='flavors'>Flavors: ${flavors}</p>
+                <p class='popularity'>Popularity Score: ${popularity}</p>
                 <hr>
             </div>`
         }
@@ -152,7 +153,7 @@
                         //console.log(data)
                         //console.log(row)
                         let tempDiv = document.createElement("div")
-                        tempDiv.innerHTML = answerBoxTemplate(row.name, row.ingredients, row.flavors)
+                        tempDiv.innerHTML = answerBoxTemplate(row.name, row.ingredients, row.flavors, row.popularity)
                         document.getElementById("answer-box").appendChild(tempDiv)
                     }));
             }
