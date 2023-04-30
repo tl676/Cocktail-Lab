@@ -1,0 +1,611 @@
+drink name,closest popular drink,score
+'57 chevy with a white license plate,'57 chevy with a white license plate,12.10022394325398
+“prepare for destiny! where’s my pizza?”,mojito,8.20864268150519
+10 to 7,french 75,1.733609188051784
+155 belmont,tequila sunrise,0.9648546578054015
+1880's americana,kentucky mai tai,7.376827786646363
+20th century,french 75,1.9832377501035794
+3 & tree,martini,0.822268660084156
+3 degrees,french 75,1.8607231597750924
+3am,french 75,1.9399723336161254
+50/50 split,manhattan,1.5393418698190295
+7th heaven,french 75,1.7814739859340594
+9 1/2 weeks,tequila sunrise,0.9233497273522852
+a gift from zara,french 75,1.7403231152736103
+a gilligan's island,tequila sunrise,0.9421534611674256
+a love song,martini,0.822268660084156
+a mi manera (my way) pisco punch,pink mojito,3.5362692695329283
+a regal air ,tequila sunrise,0.8458535166450674
+a tall tell,kentucky mai tai,8.337764880737755
+a true amaretto sour,lemon drop,0.8476914000447386
+a.d.m. (after dinner mint),'57 chevy with a white license plate,7.95003998954488
+a.nise,pink colada,3.270135623102508
+a1,tequila sunrise,0.9648546578054015
+abano sour,french 75,1.7666781404119394
+abbey martini,tequila sunrise,0.9233497273522852
+above my pay grade,manhattan,1.3953572360367879
+abrazo latino,pink colada,2.480686750073048
+absolut summertime,lemon drop,0.9233497273522852
+absolutely fabulous,pink mojito,3.5362692695329283
+absolutly screwed up,tequila sunrise,0.9233497273522852
+ace,ace,2.6130241301667176
+across the pond,french 75,1.8607231597750924
+adam & eve,french 75,1.8210985728545757
+addington,mojito,8.872632567942773
+addison,martini,1.1034059934175144
+addison special,tequila sunrise,1.1678826289713697
+adios amigos cocktail,mojito,9.588555149674255
+alaska cocktail,french 75,1.8794955198839218
+almond brother,pink mojito,3.7196750854556733
+almond crusta,kentucky mai tai,10.264386170451859
+amaretto bourbon punch,french 75,1.8444159490242023
+"amaretto jello shot, why not",pink mojito,3.423055625413349
+amaretto rose,pink mojito,3.921949051581475
+amaretto sour,french 75,2.0080478522217065
+amaretto sour (modern),french 75,1.6470119807450228
+amaretto sour bv-style,kentucky mai tai,9.447344001183922
+amaretto sourball,lemon drop,0.893756724803593
+americana fizz (layered cocktail),french 75,1.9435655178914324
+and the cherry on top is...,pink mojito,4.038109135877801
+andy warhol,french 75,1.8136935933060079
+angel face (classic),martini,0.822268660084156
+angel's face,martini,0.8443259818698893
+aperitivo spritz,french 75,1.4644772905699266
+applejack,lemon drop,0.7229610767380842
+apples & grapes,manhattan,1.4440604838562843
+apricot blush,french 75,1.5274592394759865
+apricot lady,pink mojito,3.7834125198977206
+arapa cocktail,french 75,1.7071523534736746
+arizona stingers,lemon drop,0.9233497273522852
+arizona twister,tequila sunrise,1.0275995548657733
+army special,lemon drop,0.8476914000447386
+assemble mule,pink mojito,3.6409012905531526
+astoria,martini,0.942065498327253
+aviation,french 75,1.7757841512489383
+aviation (adapted),french 75,1.8991813077639401
+b-string,kentucky mai tai,8.141266578628017
+bachelor's bait,ace,1.7868772796002828
+bacio romana,martini,0.8324693061125823
+baile de verano,french 75,1.4788990960657447
+bajo control,french 75,1.9832377501035794
+bakko & zengo,french 75,1.6124071771647646
+banana's froster,flambeed brandy alexander,2.2395558977220094
+barbary coast bulldog,pink colada,2.480686750073048
+barrel aged ginger negroni,martini,0.8583414575503777
+basil gin and tonic,mojito,8.000191607106366
+basilway daquiri,pink mojito,3.6914548296253784
+bay city shandy,kentucky mai tai,9.442729729217948
+beachcomber,pink mojito,4.120057265874719
+bermuda highball,kentucky mai tai,8.605517660147253
+bianco americano,flambeed brandy alexander,2.302001632800105
+big and bright,french 75,1.8577010426450247
+bird is the word,pink colada,3.424778842954332
+bird on,flambeed brandy alexander,2.293552962850762
+bird on a wire,pink colada,2.7821659286205422
+bird to buck,pink mojito,3.718049236046697
+black jam,french 75,1.972747770003507
+blood & sand,manhattan,1.4053194534559224
+bloody fernet,tequila sunrise,0.8002927780435333
+blue 88,french 75,1.8607231597750924
+boko buku,kentucky mai tai,8.916318483106801
+boomin' granny,french 75,1.9832377501035794
+bourbon crusta,kentucky mai tai,9.367252982525384
+brazilian mai tai,mojito,7.559076594545218
+brazilian mule punch,french 75,1.787593123356336
+brisa del sur,french 75,1.815124865424301
+bubbleliciously delicious,kentucky mai tai,8.672814361493929
+bubbly bird,pink colada,3.101924378073241
+buccaneer,pink mojito,3.9931777549506164
+buenaventura,pink mojito,3.513829505466914
+bunny poison,manhattan,1.4258776805403521
+bushido cocktail,kentucky mai tai,8.827070149493627
+buster crusta,french 75,1.7666781404119394
+buzzard's bay,pink mojito,3.6803130077028547
+cafe creole,pink colada,3.0632069615867104
+caipirinha,dark caipirinha,10.766938778848786
+california's callin',manhattan,1.4053194534559224
+canary vs. the coal mine,manhattan,1.2080407036409633
+cap't of the seven seas,french 75,1.6473772847789587
+carrier pigeon (an airmail with pink pigeon),pink mojito,4.455851703608079
+champs élysées,french 75,2.0672941924432187
+chapman cobbler,french 75,1.7310684230846618
+charente royale,french 75,1.8210985728545757
+château montifaud creation,french 75,1.6607953708106489
+château montifaud lady touch triple sec,french 75,1.8281887099051457
+château montifaud on mint,french 75,1.8577010426450247
+château montifaud on the rocks,pink colada,2.3276524960598026
+château montifaud pink love,french 75,1.8557505858189245
+cherries st. james,french 75,1.8607231597750924
+cherry bark martinez,kentucky mai tai,8.54360635871739
+cherry blossom martini,manhattan,1.3382250196483454
+cherry champagne cocktail,kentucky mai tai,8.141266578628017
+cherry old fashioned,kentucky mai tai,8.253912780043715
+cherry orchard,french 75,1.7350553519577423
+cherry shandy,pink colada,2.5802785534873864
+chilcano,kentucky mai tai,8.827070149493627
+chilcano (variation),pink mojito,3.7888649164924275
+chingerito,french 75,1.753006342297856
+chippendale rosetone,french 75,1.8991813077639401
+citrus agave caipirinha,mojito,8.357014368811269
+citrus quo (adapted),martini,0.8443259818698893
+classic lolita,kentucky mai tai,8.827070149493627
+clear intentions,pink mojito,3.423055625413349
+clearly bitter,martini,0.9016435794854154
+club med,pink mojito,3.278445400932223
+coco batida,pink colada,2.805082406647019
+coffee & clove,french 75,1.5739822504578846
+coffey grain manhattan,manhattan,1.7520872247165498
+conference,manhattan,1.4536053145796766
+corpse reviver no 1,manhattan,1.3308261944107205
+corpse reviver no.2,french 75,1.800198368122511
+cosmopolitan,lemon drop,0.9421534611674256
+cosmopolitan martini,lemon drop,0.9648546578054015
+cream soda,pink colada,2.421318224481345
+creek ran dry,martini,0.7985282979877872
+creole,kentucky mai tai,9.015676087789311
+creole cobbler,kentucky mai tai,9.442729729217948
+creole summer,french 75,1.6229756382519929
+croatia firing squad,french 75,1.7120298651659562
+crooked kilt,pink colada,2.8580763777325022
+cuba liberation,pink mojito,4.404535285135495
+culebra,french 75,1.689542658788352
+cupid's carrier pigeon,pink colada,3.0673014006981427
+cut & rum,pink colada,2.5229816023297906
+cut to the chase,kentucky mai tai,9.015676087789311
+daisy mae,french 75,2.003209922837434
+dark caipirinha,dark caipirinha,13.879294837928837
+day for night,kentucky mai tai,8.54360635871739
+delicious in mauritius,pink mojito,4.1666804856971655
+delicious sour,french 75,1.676030352455468
+dernier mot,french 75,1.6929910196447522
+desmond's choice,kentucky mai tai,8.863140148220998
+deviled negroni ,martini,0.8583414575503777
+dirty martini,martini,1.006254434910498
+divine aspect,martini,0.7985282979877872
+division bell,french 75,1.652025464733023
+doctor's orders,manhattan,1.5785125262097568
+don't rock the boat punch,french 75,1.6344634046703244
+donaji,french 75,1.9363609556537673
+down the rabbit hole,french 75,1.8794955198839218
+drink lab #16,kentucky mai tai,8.995475179950656
+drops of jupiter,french 75,1.65683121835359
+dry mauritian sour,pink mojito,3.7834125198977206
+duchamp's punch,pink mojito,3.5011201579154165
+duke's classic dry martini,martini,0.942065498327253
+dutch stories,french 75,1.797556858919723
+"eat, drink and be cherry",mojito,7.831875016360357
+eden's apple,french 75,1.6669526372412125
+el cortez,pink colada,2.5229816023297906
+el mustavo,manhattan,1.5785125262097568
+elgin elixir,pink colada,2.268972551446787
+end of winter,kentucky mai tai,8.318508570105115
+endless summer,kentucky mai tai,9.06976874166649
+english harbour colada,pink colada,3.366952165587802
+erasmus' revenge,kentucky mai tai,8.469393320741663
+espèce de sazerac,manhattan,1.362477977196584
+espresso martini,dark caipirinha,9.204302360680895
+essence no.5 (adapted),french 75,1.960650313169122
+far from the tree,french 75,1.6607953708106489
+farmer's gold,french 75,1.9278089619337129
+feingold,kentucky mai tai,8.672814361493929
+fernet frappe,french 75,1.6322333042507928
+fiery clydesdale,pink mojito,4.240955341848471
+figge bout it,kentucky mai tai,9.292953130832652
+final ward,french 75,1.786243269764337
+fiona graham,kentucky mai tai,8.827070149493627
+flambeed brandy alexander,flambeed brandy alexander,3.3770573143369376
+flamenco,kentucky mai tai,9.998270904704967
+flaming lamborghini,ace,1.4119811453513735
+flight to peru,french 75,1.7403231152736103
+flip and flight,pink colada,2.8302539283949053
+flip the bird,pink colada,3.101924378073241
+floral summer,french 75,2.042197040293822
+fortune & glory,kentucky mai tai,9.150524783282501
+fourth generation,kentucky mai tai,8.916318483106801
+frankie and johnnie,kentucky mai tai,9.150524783282501
+french 33,french 75,2.2404886070567414
+french 75,french 75,2.6130241301667176
+french maid,pink mojito,4.084792168370978
+french martini,pink colada,2.977580470178065
+frisco san,kentucky mai tai,8.486398488247007
+full of bologna,french 75,1.6607953708106489
+gagliardo,lemon drop,0.9074423275639777
+garrison's new fashioned,kentucky mai tai,9.534019823185728
+geaux geaux cup,french 75,1.786243269764337
+georgia old fashioned,kentucky mai tai,9.159165932012433
+gin made me do it,kentucky mai tai,8.746325411916876
+gin n' celery,french 75,1.8136935933060079
+gin rickey,mojito,9.250547175681977
+ginger drop,french 75,1.8991813077639401
+ginger pigeon,pink mojito,4.15701150990273
+glimpse of seduction,french 75,1.797556858919723
+goat town swizzle,kentucky mai tai,9.435703096539303
+gold rush,pink mojito,3.9368285424317024
+gold spritz,pink mojito,3.341265653769836
+gran classico negroni,manhattan,1.5579474773819673
+green and gold,lemon drop,0.8162975997451698
+grey anchor,pink mojito,3.3623839060521323
+grown-up shirley temple,pink mojito,3.859505857490293
+hanky panky (classic),manhattan,1.5785125262097568
+hanny's hot apple toddy,pink colada,2.7318095697090206
+harms' way,kentucky mai tai,8.469393320741663
+heard it through the grapevine,flambeed brandy alexander,2.1349845576423494
+heart breaker,kentucky mai tai,9.127207908194489
+hemingway daiquiri,pink colada,3.2683375454409185
+hibiscus pisco sour,french 75,1.6607953708106489
+hidarite,manhattan,1.7074744853161876
+hippi hill,pink mojito,3.8072180885980877
+holland house,french 75,1.7658904691371964
+honey basil smash,pink mojito,3.859505857490293
+hophead dirty martini,martini,0.980873725483946
+hophead old fashioned,french 75,1.7310684230846618
+hopped-up mary,lemon drop,0.8712878642394465
+hopped-up mule,french 75,1.6322333042507928
+hotaling seaside shandy,martini,0.7682693430976767
+hotaling white manhattan,manhattan,1.4672192434602482
+huntsman,pink colada,3.1230030646591014
+i'm only happy when it rains,pink colada,2.565803291224315
+imperial cocktail,tequila sunrise,0.8906237567473916
+improved calvados cocktail,kentucky mai tai,8.672814361493929
+improved whisky cocktail,kentucky mai tai,7.337084744773359
+in hinesight,flambeed brandy alexander,2.2277664987090366
+international mistress,kentucky mai tai,8.827070149493627
+ipa mule,french 75,1.8281887099051457
+irish curdling cow,tequila sunrise,0.9233497273522852
+irish goodbye,flambeed brandy alexander,2.0395917867693427
+iron fist in a velvet glove,french 75,1.4064500024102835
+iron tonic,french 75,1.6929910196447522
+italian margarita,pink mojito,3.615090146909221
+italian riviera mojito,pink mojito,3.7834125198977206
+jalapeño sour,pink mojito,3.6803130077028547
+jammie dodger fizz,flambeed brandy alexander,2.435203986399138
+japanese cocktail,kentucky mai tai,10.223563307536365
+japonais no.3,french 75,2.019221507457159
+jitterbug,mojito,9.910410745264103
+julia's child,french 75,1.9979168812224017
+juniperotivo,pink mojito,4.45997812075901
+kanazawa,kentucky mai tai,8.54360635871739
+karlsson's mule,pink mojito,3.702483527814268
+karlsson's old fashioned,'57 chevy with a white license plate,7.710409669074238
+karlsson's winter punch,pink mojito,3.6188237427769456
+kay pacha mi pacha,kentucky mai tai,9.292953130832652
+kentucky likker,kentucky mai tai,9.150524783282501
+kentucky mai tai,kentucky mai tai,13.38593822417051
+kick the pigeon,pink mojito,3.718049236046697
+kind of fancy,manhattan,1.3160097742499526
+king's medicine,french 75,1.6344634046703244
+king's snap the chocolate out of you,ace,1.4973067226758354
+king's toddy,french 75,2.0672941924432187
+kir,kir,3.9195361952500765
+kir royale,kir,3.4444186332279187
+kiss,martini,0.822268660084156
+kiss of persuasion,pink colada,2.652945793878294
+knockemdown key,pink mojito,4.038109135877801
+kumquat smash,pink colada,2.5400193033976772
+l.e.s. is more,french 75,2.0354708191823807
+l'aviation,french 75,1.9832377501035794
+la capilla,french 75,1.6344634046703244
+la chiara,kentucky mai tai,7.809946990716602
+la hops vie,french 75,1.9604345493708029
+la la land,french 75,1.6669526372412125
+la madrugada,french 75,1.6607953708106489
+la maracuja,dark caipirinha,8.702789594555936
+la nueva moda (the new fashion),kentucky mai tai,8.38391676970926
+last samurai,lemon drop,0.8476914000447386
+last word,french 75,1.786243269764337
+le femme nikita,kentucky mai tai,8.091737537484127
+le sang et sable,tequila sunrise,0.8712878642394465
+lemon drop,lemon drop,1.3065120650833586
+little ground tapper,kentucky mai tai,8.605517660147253
+local edition punch,french 75,1.5861702357737397
+lonesome george,pink mojito,3.206186998788157
+long division,tequila sunrise,0.9074423275639777
+long island limoncello martini,french 75,1.797556858919723
+lost at sea,pink mojito,4.145027889629806
+lovage in the garden,pink mojito,3.715573385756138
+lux cherry sparkler,pink colada,2.54923961853657
+lux japanese lemonade,french 75,1.8281887099051457
+lux orchard lemonade,french 75,1.753006342297856
+lux shandy,french 75,1.8794955198839218
+luxardo fresco,french 75,1.733609188051784
+luxardo ice cream float,pink colada,2.6761762437702132
+luxardo maraschino simple spritz,mojito,8.000191607106366
+luxardo sling,french 75,1.6607953708106489
+luxardo sour,kentucky mai tai,9.150524783282501
+malibu twister,pink colada,2.977580470178065
+mandrake,flambeed brandy alexander,1.852397576610408
+manhattan,manhattan,2.0706332120937523
+maraschino side car,french 75,1.786243269764337
+marchesa,kentucky mai tai,8.318508570105115
+maria canevari punch,french 75,1.8870640713384053
+martinez,manhattan,1.5910188234688998
+martinez cocktail,martini,0.9267645292846134
+martini,martini,1.3064241022431862
+mary pickford,pink colada,3.0609251947574685
+masataka's vision,kentucky mai tai,8.253912780043715
+mauritian buck,pink colada,3.028428899914714
+mauritian made,pink mojito,4.608592875011328
+mauritius sour,pink mojito,4.038109135877801
+mayahuel's revenge,manhattan,1.3265965149215093
+mayan decadence,kentucky mai tai,8.045971241107818
+mayan mule,kentucky mai tai,8.696581634531427
+mayan sacrifice champagne cocktail,french 75,1.4508802819525315
+mean martinez,martini,0.7177727908836985
+merry sherry cobbler,kentucky mai tai,8.746325411916876
+mexican sazerac,kentucky mai tai,8.389907236995654
+mexico mule,pink mojito,3.5866355687003733
+mezcal witch,pink mojito,4.038698707277732
+miami vice,pink colada,2.3276524960598026
+midnight mint,ace,1.6228138722239385
+mille miglia,pink mojito,3.5604580602446094
+mint garden,french 75,1.8444159490242023
+mister gingy,kentucky mai tai,9.534019823185728
+miyagikyo kick,french 75,1.6473772847789587
+mojito,mojito,12.554507956924983
+mojito #3,pink mojito,3.860668908225561
+monet,french 75,1.7403231152736103
+monkey gland,tequila sunrise,0.9447526207973012
+morlacco julep,pink mojito,3.278445400932223
+mott and mulberry,french 75,1.843813622035527
+muddled mission,french 75,1.7658904691371964
+mule pigeon,kentucky mai tai,8.659750168121507
+mystique green (adapted),french 75,1.8791035860444227
+nara mule,french 75,1.8870640713384053
+naughty nikka,kentucky mai tai,8.54360635871739
+negroni,manhattan,1.6014070039998316
+negroni d'amore,flambeed brandy alexander,2.122825685877299
+negroni sorbetto,flambeed brandy alexander,2.23523731552622
+neighborhood negroni,manhattan,1.5707088781653409
+neko colada,pink colada,2.677716950958615
+nellie fer' toddy,french 75,1.753006342297856
+new york lemonade,lemon drop,0.9233497273522852
+newton's theory,kentucky mai tai,8.003514182997685
+nieux carré,kentucky mai tai,8.003514182997685
+nigamono,french 75,1.42948153664881
+nikka coffey grain perfect manhattan,manhattan,1.7287963952391252
+nikka coffey malt old fashioned,manhattan,1.5027010758617425
+nikka earl grey,french 75,1.4963101190920118
+no.3 & t,french 75,1.9399723336161254
+no.3 bramble,french 75,1.9435655178914324
+no.3 negroni,manhattan,1.6014070039998316
+nola '75,french 75,2.0354708191823807
+nuestra julep,kentucky mai tai,8.995475179950656
+oaxacan martini,kentucky mai tai,9.33563172888214
+obituary cocktail,martini,0.9134184551464769
+ode to kinshi,kentucky mai tai,8.003514182997685
+off the radar,french 75,1.676030352455468
+old fashioned,kentucky mai tai,9.262093947095488
+old tom and the sea,manhattan,1.3063179970122538
+on the flipside,pink mojito,4.6871886779368115
+on the wings of eagles,kentucky mai tai,9.33563172888214
+orange batida,tequila sunrise,0.9421534611674256
+orange crush,pink colada,2.421318224481345
+orchard malt mule,kentucky mai tai,9.223778576572537
+p.t. barnum cocktail,french 75,1.9832377501035794
+pacific breeze,pink mojito,3.7834125198977206
+pacific kick,french 75,1.733609188051784
+padova collins,pink mojito,3.6914548296253784
+palais royal,french 75,1.733609188051784
+palermo breeze,french 75,1.5739822504578846
+pants off dance off,french 75,1.753006342297856
+paradiso sun,tequila sunrise,0.893756724803593
+parisian manhattan,kentucky mai tai,8.827070149493627
+party in the agave fields,manhattan,1.4684267515198561
+passion fruit batida,dark caipirinha,8.787934380719008
+passionate pigeon ,pink mojito,3.859505857490293
+pb&k old fashioned,kentucky mai tai,8.995475179950656
+pda,french 75,1.6470119807450228
+peace daiquiri,pink mojito,4.456702011851717
+peach batida,pink colada,2.7656953823368506
+peachy keane,kentucky mai tai,9.695797039323175
+pear and cranberry fizz,french 75,1.6473772847789587
+peruvian wish (adapted),french 75,1.4508802819525315
+peter pumpkin,french 75,1.689542658788352
+phad thai,french 75,1.65683121835359
+phineas flip,pink colada,2.54923961853657
+picadilly,french 75,2.053735812727015
+piedra de sol,kentucky mai tai,9.33563172888214
+pina del este,pink mojito,3.5011201579154165
+pineapple express,pink colada,2.565803291224315
+pink & black,pink colada,3.316767982867918
+pink & ginger,pink colada,3.316767982867918
+pink colada,pink colada,4.340139135309716
+pink mojito,pink mojito,5.549594888144667
+pink pigeon punch,pink mojito,4.2744958995809315
+pink punch,pink colada,3.226603871434523
+pink ribbon,pink colada,2.8580763777325022
+pisco punch,pink mojito,4.0890136784028535
+pisco punch (adaptation by the commissary),french 75,1.7160101317950238
+pisco punch (adaptation by the comstock saloon),french 75,1.7666781404119394
+pisco sour,french 75,1.8607231597750924
+pistachio follies,pink colada,2.7318095697090206
+platonic snuggle,pink colada,2.6515767337807494
+playa matalan (mezcal negroni),manhattan,1.6543239765577713
+polish penance,manhattan,1.2891629737244243
+pontchartrain punch,french 75,1.7476084911634133
+prata punch,dark caipirinha,9.022813120528708
+prickly pear margarita,pink mojito,3.7600598944669104
+primo carnera,pink colada,2.2294361333985075
+prince of humbugs,kentucky mai tai,8.605517660147253
+profundo,pink colada,2.5802785534873864
+pumpkin & pecan,french 75,1.8791035860444227
+radice amara,french 75,1.5308574204498013
+raspberry batida,flambeed brandy alexander,2.2395558977220094
+red bud trail,manhattan,1.5634938970232537
+red letters,french 75,1.6322333042507928
+redondo beach,pink mojito,3.880135386903855
+rhapsody in red,french 75,1.7160101317950238
+rio de janeiro mule,kentucky mai tai,8.746325411916876
+rita's song,french 75,1.6026416070832763
+ritz cocktail,french 75,1.786243269764337
+roasted cherry colada,dark caipirinha,9.132034059323805
+root down,french 75,1.6778239746905659
+rose sangria,french 75,1.831936153892229
+rothes julep,pink mojito,3.9931777549506164
+rothes roy,manhattan,1.6811721064173761
+round pond aperitif,french 75,1.9212347318689422
+ruby tuesday,tequila sunrise,0.8906237567473916
+rudolph's rose,flambeed brandy alexander,2.0920839534874296
+sabotage,kentucky mai tai,7.376827786646363
+sade's taboo,manhattan,1.3382250196483454
+sahara glowing heart,kentucky mai tai,9.23873804379004
+salty swede,pink mojito,3.5675758968854634
+san fran shandy,kentucky mai tai,9.223778576572537
+san fran soda,pink mojito,3.7600598944669104
+santa patricia,french 75,1.7310684230846618
+sazerac,manhattan,1.4684267515198561
+scotch joplin,kentucky mai tai,9.015676087789311
+see you t'amaro,french 75,1.843813622035527
+seersucker sunshine,french 75,1.6470119807450228
+shadowcat,kentucky mai tai,9.150524783282501
+shark attack,lemon drop,0.9233497273522852
+short round,pink colada,2.6320789568750964
+short round ii,pink mojito,3.762846156623635
+sidecar,french 75,1.8991813077639401
+sidewinder,kentucky mai tai,8.141266578628017
+simply perfecto,french 75,1.501256960147883
+singapore sling (1915 recipe),french 75,1.787593123356336
+sloe & steady,french 75,1.4963101190920118
+smashing great pumpkins,pink colada,2.4478152100240864
+smoke on the dock,french 75,1.7658904691371964
+snow bunny,french 75,1.65683121835359
+soleo,pink colada,2.3808031617764946
+solera sidecar,french 75,1.843813622035527
+soma fizz,french 75,1.753006342297856
+sorrentino,manhattan,1.5579474773819673
+sorriso (adapted),french 75,1.6344634046703244
+space age pop,french 75,1.7120298651659562
+spice and stormy,pink mojito,4.197326161088864
+spiced marmalade,french 75,1.9033710775124357
+spring cleanse,pink mojito,3.0828069846114174
+spring forward,french 75,2.015249092775893
+stinger,flambeed brandy alexander,2.5105584564061765
+stone fruit patch v1,pink mojito,3.606874391994777
+stone fruit patch v2,french 75,1.7658904691371964
+stranger in the alps,french 75,1.4871691301051204
+strike no.3,french 75,2.0354708191823807
+stroll through the park,french 75,1.787593123356336
+swedish 75,lemon drop,0.8818196332013429
+swedish nightingale,french 75,1.6778239746905659
+swedish royal,martini,0.8324693061125823
+tahitian fix,french 75,1.8281887099051457
+tamaulipas margarita,tequila sunrise,0.893756724803593
+tea & sympathy,french 75,1.6607953708106489
+tea party cocktail,french 75,1.8791035860444227
+temple of the moon,french 75,1.6385205556984106
+tequila sunflare,french 75,1.552916677545625
+tequila sunrise,tequila sunrise,1.3065120650833586
+the alpine mist,pink mojito,3.750215511987397
+the asterisk,french 75,1.733609188051784
+the awen,kentucky mai tai,8.746325411916876
+the bacchus cocktail,pink colada,2.613200315564182
+the big picture,french 75,1.7160101317950238
+the bitter king,french 75,2.0377368394547584
+the bittered valley,kentucky mai tai,8.003514182997685
+the boys of summer cup,french 75,1.800198368122511
+the brightside,pink colada,3.226603871434523
+the canevari cocktail,manhattan,1.522733743928058
+the cappa,martini,0.7358091896168094
+the cavalier white lady,french 75,1.960650313169122
+the chief,kentucky mai tai,8.045971241107818
+the claridge,martini,0.9267645292846134
+the cliffdiver,kentucky mai tai,8.517636023459382
+the commissioner's trophy #3,french 75,1.6929910196447522
+the double crown,french 75,1.6796765254246813
+the douglas tilden,kentucky mai tai,8.337764880737755
+the evil blue thing,'57 chevy with a white license plate,9.320024014715406
+the french connection,french 75,2.094860972574471
+the fritz,kentucky mai tai,7.99002964593712
+the ginger royale,pink colada,2.0375540423156706
+the hollinger manhattan,manhattan,1.2080407036409633
+the house of duncan,kentucky mai tai,8.672814361493929
+the improved sazerac,french 75,1.6669526372412125
+the inside job,kentucky mai tai,9.06976874166649
+the king and tonic,kentucky mai tai,9.127207908194489
+the king merlet sidecar,french 75,1.7310684230846618
+the king's autumn cobbler,kir,2.2938659996646935
+the king's cranberry sauce,tequila sunrise,0.8162975997451698
+the king's egg nog,ace,1.7350553519577423
+the king's froth & frizz,pink mojito,3.446767773920722
+the king's ginger spiced punch,pink mojito,3.7600598944669104
+the king's ginger summer cup,pink mojito,3.6514167416843386
+the king's medicine,french 75,1.6344634046703244
+the king's mulled cider,pink colada,2.7656953823368506
+the king's mulled wine,dark caipirinha,8.395955174527284
+the king's queen,dark caipirinha,8.251072394161426
+the king's spring daisy,french 75,1.9399723336161254
+the king's squeeze,lemon drop,0.8002927780435333
+the king's winter cup,pink colada,2.480686750073048
+the kings mule,kentucky mai tai,9.253622147014115
+the lady whisper,manhattan,1.3731774117295763
+the ladybird,pink colada,2.94209489426853
+the last marasca,french 75,1.7658904691371964
+the last wish,flambeed brandy alexander,2.0395917867693427
+the lover's quarrel ,french 75,1.9785534451197255
+the mad king,kentucky mai tai,8.827070149493627
+the mayan premonition,french 75,1.7666781404119394
+the molino,french 75,1.8344216115161776
+the monte rua,french 75,1.562955538405384
+the no.3 winter cup,martini,0.8518052253459468
+the no.3 winter punch,martini,0.8817316703611703
+the palace cellar,french 75,1.7757841512489383
+the pink aperitivo,manhattan,1.2752667248176996
+the pink pussycat,pink colada,3.1888465888126936
+the professor,kentucky mai tai,8.486398488247007
+the proverb,kentucky mai tai,8.916318483106801
+the queen's a redhead,french 75,1.6344634046703244
+the red anchor,french 75,1.9399723336161254
+the reserved king,kentucky mai tai,9.969140975329097
+the rickenbacker,manhattan,1.4440604838562843
+the robert baratheon,kentucky mai tai,8.916318483106801
+the royal buck,french 75,2.1513506347828577
+the royal king,pink colada,2.3808031617764946
+the rusty tack,pink colada,2.3276524960598026
+the seniorita,pink colada,2.8956768409677305
+the silver cocktail,martini,0.8911539861400606
+the sixth sense,pink colada,3.1230030646591023
+the southside,french 75,2.252504520362262
+the sparkler,flambeed brandy alexander,1.9630339079045518
+the stand by,kentucky mai tai,8.916318483106801
+the sun also rises,pink mojito,3.5362692695329283
+the tahoe toddy,french 75,1.5457015408114738
+the touch  of glass,pink colada,2.2504281094671845
+the twinger ,kentucky mai tai,9.253622147014115
+the windtalker,french 75,1.6778239746905659
+three flips,french 75,1.8991813077639401
+thyme for bed,pink mojito,3.9517348928862197
+toasted drop,french 75,1.6607953708106489
+tokyo tea,kentucky mai tai,8.54360635871739
+trip to jarnac,french 75,2.042197040293822
+tropical bronzer,french 75,1.65683121835359
+under the sun,pink colada,2.761186723877958
+venetian,martini,0.8583414575503777
+vesper,french 75,1.7120298651659562
+vesper's sister,martini,0.805521360218024
+vida verde (adapted),mojito,8.047835149842411
+vieux carré,manhattan,1.6599986250742629
+vintage reserve sour,french 75,2.0377368394547584
+vinterpäls,tequila sunrise,0.8619056867288293
+virgil st.,manhattan,1.4794482039036934
+wabash avenue sour,french 75,1.6778239746905659
+war of the roses,french 75,1.8281887099051457
+west coast punch,pink mojito,3.9517348928862197
+west coast vesper,'57 chevy with a white license plate,6.89349401497636
+where's the orgeat?,kentucky mai tai,9.998270904704967
+white lady,french 75,1.6929910196447522
+white lady (classic) (adapted),french 75,1.9832377501035794
+white tie,french 75,1.7658904691371964
+white walker flip,kentucky mai tai,8.045971241107818
+willow,manhattan,1.362477977196584
+windtalker,french 75,1.6778239746905659
+winter season,french 75,1.6778239746905659
+winter swizzle,pink colada,3.3943653202449595
+yawkey way ,french 75,1.8607231597750924
+yellow bird,mojito,8.24880173461242
+"yes, queen!",french 75,1.6929910196447522
+you bet your ascot,french 75,1.562955538405384
+you're bitter than that,pink mojito,3.9681663037112584
+ypioca chile punch,dark caipirinha,9.620279890777407
+ypioca yellow card,pink colada,2.9179694571634114
+zippy's revenge,pink colada,2.421318224481345
+zorbatini,'57 chevy with a white license plate,7.95003998954488

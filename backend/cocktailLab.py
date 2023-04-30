@@ -255,7 +255,7 @@ class CocktailLab:
                 retval.append(idx)
         return retval
 
-    def query(self, ingred_prefs=None, ingred_antiprefs=None, ingred_include=None, ingred_exclude=None):
+    def query(self, input_drink=None, ingred_prefs=None, ingred_antiprefs=None, ingred_include=None, ingred_exclude=None):
         print(f"""prefs:{ingred_prefs}
         antiprefs:{ingred_antiprefs}
         include:{ingred_include}
@@ -306,6 +306,10 @@ class CocktailLab:
                  for word in ingred_exclude.split(",")],
                 self.ingreds_tfidf_vectorizer,
                 matrix)
+            
+        if input_drink:
+            flavor_prefs_vec = matrix[input_drink]
+            return self.cos_rank(flavor_prefs_vec, matrix)
 
         # cosine sim:
         cos_rank = self.cos_rank(
