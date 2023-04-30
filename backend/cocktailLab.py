@@ -247,6 +247,9 @@ class CocktailLab:
             if np.sum(combine) == 0:
                 retval.append(idx)
         return retval
+    
+    def comma_space_split(self, str):
+        return [i for i in ",".join(str.split(" ")).split(",") if i]
 
     def query(self, ingred_prefs=None, ingred_antiprefs=None, ingred_include=None, ingred_exclude=None):
         print(f"""prefs:{ingred_prefs}
@@ -274,7 +277,7 @@ class CocktailLab:
         if ingred_prefs:
             flavor_prefs_vec = self.make_query(
                 [word.strip().lower()
-                 for word in ingred_prefs.split(",")],
+                 for word in self.comma_space_split(ingred_prefs)],
                 self.ingreds_tfidf_vectorizer,
                 matrix)
 
@@ -282,21 +285,21 @@ class CocktailLab:
             # set the antipref flavors as -1
             flavor_antiprefs_vec = -1 * self.make_query(
                 [word.strip().lower()
-                 for word in ingred_antiprefs.split(",")],
+                 for word in self.comma_space_split(ingred_antiprefs)],
                 self.ingreds_tfidf_vectorizer,
                 matrix)
 
         if ingred_include:
             flavor_include_vec = self.make_query(
                 [word.strip().lower()
-                 for word in ingred_include.split(",")],
+                 for word in self.comma_space_split(ingred_include)],
                 self.ingreds_tfidf_vectorizer,
                 matrix)
 
         if ingred_exclude:
             flavor_exclude_vec = self.make_query(
                 [word.strip().lower()
-                 for word in ingred_exclude.split(",")],
+                 for word in self.comma_space_split(ingred_exclude)],
                 self.ingreds_tfidf_vectorizer,
                 matrix)
 
