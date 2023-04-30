@@ -7,18 +7,18 @@ class CocktailLab:
     def __init__(self):
         """Dictionary of {drink name: ingredients}"""
         self.cocktail_names_to_ingreds = self.read_file_ingreds(
-            'data/cocktail_flavors_ingreds_combined_denumbered.csv')
+            'data/cocktail_flavors_ingreds_popularity.csv')
 
         self.cocktail_names_to_ingreds_only = self.read_file_ingreds(
-            'data/cocktail_flavors_ingreds_combined_denumbered.csv', ingreds_only=True)
+            'data/cocktail_flavors_ingreds_popularity.csv', ingreds_only=True)
 
         """Dictionary of {drink name: flavors}"""
         self.cocktail_names_to_flavors = self.read_file_flavors(
-            'data/cocktail_flavors_ingreds_combined_denumbered.csv')
+            'data/cocktail_flavors_ingreds_popularity.csv')
 
         """Dictionary of {drink name: popularity}"""
         self.cocktail_names_to_popularity = self.read_file_popularity(
-            'data/cocktail_flavors_popularity_denumbered.csv')
+            'data/cocktail_flavors_ingreds_popularity.csv')
 
         """Number of cocktails"""
         self.num_cocktails = len(self.cocktail_names_to_ingreds)
@@ -54,8 +54,6 @@ class CocktailLab:
         """ Returns a dictionary of format {'cocktail name' : 'ingred1,ingred2'}
         Parameters:
         file: name of file
-
-        ***Note: CURRENTLY CONFIGURED FOR cocktail_flavors_ingreds_combined***
         """
         with open(file, encoding="utf8") as csv_file:
             csv_reader = csv.reader(csv_file, delimiter=',')
@@ -66,17 +64,15 @@ class CocktailLab:
                     line_count += 1
                 else:
                     if ingreds_only:
-                        out[row[0].lower()] = row[3].lower()
+                        out[row[1].lower()] = row[3].lower()
                     else:
-                        out[row[0].lower()] = row[12].lower()
+                        out[row[1].lower()] = row[5].lower()
         return out
 
     def read_file_flavors(self, file):
         """ Returns a dictionary of format {'cocktail name' : 'flavor1,flavor2'}
         Parameters:
         file: name of file
-
-        ***Note: CURRENTLY CONFIGURED FOR cocktail_flavors_ingreds_combined***
         """
         with open(file, encoding="utf8") as csv_file:
             csv_reader = csv.reader(csv_file, delimiter=',')
@@ -86,7 +82,7 @@ class CocktailLab:
                 if line_count == 0:
                     line_count += 1
                 else:
-                    out[row[0].lower()] = ', '.join(row[13].lower().split())
+                    out[row[1].lower()] = ', '.join(row[6].lower().split())
         return out
 
     def read_file_popularity(self, file):
@@ -103,7 +99,7 @@ class CocktailLab:
                 if line_count == 0:
                     line_count += 1
                 else:
-                    out[row[0].lower()] = row[11]
+                    out[row[1].lower()] = float(row[7])
         return out
 
     def make_vectorizer(self, binary=False, max_df=1.0, min_df=1, use_stop_words=True):
@@ -145,7 +141,7 @@ class CocktailLab:
         tf_mat = TfidfVectorizer(max_df=max_df, min_df=min_df,
                                  stop_words=stop_words, use_idf=use_idf,
                                  binary=binary, norm=norm,
-                                 analyzer='word', token_pattern='[^,]+'
+                                #  analyzer='word', token_pattern='[^,]+'
                                  )
 
         return tf_mat
@@ -317,7 +313,7 @@ class CocktailLab:
         rank_list = [{
             'name': self.cocktail_index_to_name[i[0]],
             'ingredients': self.cocktail_names_to_ingreds_only[self.cocktail_index_to_name[i[0]]],
-            'flavors': self.cocktail_names_to_flavors[self.cocktail_index_to_name[i[0]]][1:]
+            'flavors': self.cocktail_names_to_flavors[self.cocktail_index_to_name[i[0]]]
         } for i in cos_rank]
 
         # boolean
