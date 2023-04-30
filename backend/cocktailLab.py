@@ -202,17 +202,10 @@ class CocktailLab:
             doc = doc_by_vocab[d]
             sim = self.cos_sim(query, doc)
             # adjust by popularity
-            sim += self.popularity_boost(self.cocktail_index_to_name[d]) * 0.2
+            sim += self.cocktail_names_to_popularity[self.cocktail_index_to_name[d]] * 0.2
             retval.append([d, sim])
         return list(sorted(retval, reverse=True, key=lambda x: x[1]))
 
-    def popularity_boost(self, cocktail_name):
-        """ Returns popularity boost amount for the cocktail, ranging from 0
-        (least popular) to 1 (most popular)
-        """
-        if self.cocktail_names_to_popularity[cocktail_name] == "":
-            return 0
-        return 1 - (int(self.cocktail_names_to_popularity[cocktail_name]) - 5397) / 1576
 
     def boolean_search_and(self, query, doc_by_vocab):
         """ Returns a list of doc indexes that contain all the query words
