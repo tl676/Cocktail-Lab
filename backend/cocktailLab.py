@@ -82,7 +82,7 @@ class CocktailLab:
                 if line_count == 0:
                     line_count += 1
                 else:
-                    out[row[1].lower()] = ', '.join(row[6].lower().split())
+                    out[row[1].lower()] = ', '.join(row[6].lower().split(","))
         return out
 
     def read_file_popularity(self, file):
@@ -202,7 +202,7 @@ class CocktailLab:
             doc = doc_by_vocab[d]
             sim = self.cos_sim(query, doc)
             # adjust by popularity
-            sim += self.cocktail_names_to_popularity[self.cocktail_index_to_name[d]] * 0.2
+            sim += self.cocktail_names_to_popularity[self.cocktail_index_to_name[d]] * 0.02
             retval.append([d, sim])
         return list(sorted(retval, reverse=True, key=lambda x: x[1]))
 
@@ -309,7 +309,8 @@ class CocktailLab:
         rank_list = [{
             'name': self.cocktail_index_to_name[i[0]],
             'ingredients': self.cocktail_names_to_ingreds_only[self.cocktail_index_to_name[i[0]]],
-            'flavors': self.cocktail_names_to_flavors[self.cocktail_index_to_name[i[0]]]
+            'flavors': self.cocktail_names_to_flavors[self.cocktail_index_to_name[i[0]]],
+            'popularity': self.cocktail_names_to_popularity[self.cocktail_index_to_name[i[0]]]
         } for i in cos_rank]
 
         # boolean
@@ -330,4 +331,4 @@ class CocktailLab:
 # here for testing purposes (run $ python cocktailLab.py)
 if __name__ == "__main__":
     cocktail = CocktailLab()
-    print("citrus" in cocktail.ingreds_tfidf_vectorizer.get_feature_names())
+    print(cocktail.cocktail_names_to_popularity)
