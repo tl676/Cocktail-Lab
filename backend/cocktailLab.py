@@ -1,6 +1,7 @@
 from sklearn.feature_extraction.text import TfidfVectorizer
 import numpy as np
 import csv
+import math
 
 
 class CocktailLab:
@@ -49,6 +50,10 @@ class CocktailLab:
         """Dictionary of {index: token}"""
         self.index_to_vocab = {i: v for i, v in enumerate(
             self.ingreds_tfidf_vectorizer.get_feature_names())}
+
+        self.rocchio_alpha = 1.0
+
+        self.rocchio_beta = 1.0
 
     def read_file_ingreds(self, file, ingreds_only=False):
         """ Returns a dictionary of format {'cocktail name' : 'ingred1,ingred2'}
@@ -204,7 +209,8 @@ class CocktailLab:
             # adjust by popularity
             sim += self.cocktail_names_to_popularity[self.cocktail_index_to_name[d]] * 0.02
             retval.append([d, sim])
-        return list(sorted(retval, reverse=True, key=lambda x: x[1]))
+        sorted_list = list(sorted(retval, reverse=True, key=lambda x: x[1]))
+        return sorted_list
 
     def boolean_search_and(self, query, doc_by_vocab):
         """ Returns a list of doc indexes that contain all the query words
@@ -250,11 +256,13 @@ class CocktailLab:
     def comma_space_split(self, str):
         return [i for i in ",".join(str.split(" ")).split(",") if i]
 
-    def query(self, ingred_prefs=None, ingred_antiprefs=None, ingred_include=None, ingred_exclude=None):
+    def query(self, ingred_prefs=None, ingred_antiprefs=None, ingred_include=None, ingred_exclude=None,
+              rocchio_plus=None, rocchio_minus=None):
         print(f"""prefs:{ingred_prefs}
         antiprefs:{ingred_antiprefs}
         include:{ingred_include}
-        exclude:{ingred_exclude}""")
+        exclude:{ingred_exclude}
+        rocchio:{rocchio_plus}, {rocchio_minus}""")
 
         # initialize variables
         matrix = self.ingreds_doc_by_vocab
@@ -270,6 +278,8 @@ class CocktailLab:
             [""], self.ingreds_tfidf_vectorizer, matrix)
         flavor_include_vec = np.zeros(len(self.index_to_vocab))
         flavor_exclude_vec = np.zeros(len(self.index_to_vocab))
+        rocchio_plus_vec = np.zeros(len(self.index_to_vocab))
+        rocchio_minus_vec = np.zeros(len(self.index_to_vocab))
         cos_rank = None
 
         # vectorize inputs, if necessry
@@ -302,14 +312,24 @@ class CocktailLab:
                 self.ingreds_tfidf_vectorizer,
                 matrix)
 
+        if rocchio_plus:
+            rocchio_plus_vec = self.ingreds_doc_by_vocab[int(
+                rocchio_plus)] * self.rocchio_alpha
+
+        if rocchio_minus:
+            rocchio_minus_vec = - \
+                self.ingreds_doc_by_vocab[int(
+                    rocchio_minus)] * self.rocchio_beta
+
         # cosine sim:
         cos_rank = self.cos_rank(
-            flavor_prefs_vec + flavor_antiprefs_vec, matrix)
+            flavor_prefs_vec + flavor_antiprefs_vec + rocchio_plus_vec + rocchio_minus_vec, matrix)
         rank_list = [{
             'name': self.cocktail_index_to_name[i[0]],
             'ingredients': self.cocktail_names_to_ingreds_only[self.cocktail_index_to_name[i[0]]],
             'flavors': self.cocktail_names_to_flavors[self.cocktail_index_to_name[i[0]]],
-            'popularity': self.cocktail_names_to_popularity[self.cocktail_index_to_name[i[0]]]
+            'popularity': self.cocktail_names_to_popularity[self.cocktail_index_to_name[i[0]]],
+            'id': i[0]
         } for i in cos_rank]
 
         # boolean
@@ -324,6 +344,17 @@ class CocktailLab:
 
         # print(drink_name_list)
         print(f"{len(rank_list)} drinks returned")
+        print(cos_rank[0:5])
+        
+        # # display error message if invalid ingredient
+        # if math.isnan(cos_rank[0][1]):
+        #     return [{
+        #         'id': -1,
+        #         'name': "Please enter a valid ingredient or flavor.",
+        #         'ingredients': "",
+        #         'flavors': "",
+        #         'popularity': ","
+        #     }]
         return rank_list
 
 

@@ -6,7 +6,8 @@ body {
 
 p {
     color: rgb(89, 141, 99);
-    font-size: 28px;
+    font-size: 18px;
+    line-height: 1em;
 }
 
 .full-body-container {
@@ -24,12 +25,15 @@ p {
 }
 
 h1 {
-    font-size: 100px;
-    color: #80c58e;
+    color: #80cb8e;
+    font-size: 50px;
+    line-height: 0em;
 }
 
 h4 {
-    color: #80c58e;
+    color: #80cb8e;
+    font-size: 24px;
+    line-height: 0em;
 }
 
 .cocktail-text {
@@ -40,24 +44,24 @@ h4 {
 }
 
 .cocktail-text img {
-    height: 300px;
+    height: 250px;
     margin: 1em;
 }
 
 .input-box {
-    border-radius: 50px;
+    border-radius: 16px;
     border: 1px solid black;
     display: flex;
     align-items: center;
-    margin-top: 1em;
-    padding: 12px;
+    margin-top: 0.3em;
+    padding: 5px;
     width: 600px;
     background-color: #D8EEFA;
 }
 
 .input-box img {
-    height: 20px;
-    width: 20px;
+    height: 10px;
+    width: 10px;
 }
 
 .top-text {
@@ -69,7 +73,7 @@ h4 {
 .input-box input {
     width: 100%;
     margin-left: 10px;
-    font-size: 24px;
+    font-size: 16px;
     border: none;
     outline: 0;
     background-color: #D8EEFA;
@@ -81,25 +85,41 @@ h4 {
     background-color: #80c58e;
     border-radius: 20px;
     margin-right: 10px;
-    font-size: 24px;
+    font-size: 16px;
     border: none;
+    margin-bottom: 0.8em;
 }
 
-.filter-btn:focus {
-    outline: none;
-}
 
 .flavor-filter {
-    padding: 1em;
+    padding: 2px;
 }
 
 .active {
-    background-color: #649c6f;
+    background-image: linear-gradient(rgb(0 0 0/30%) 0 0);
     border: none;
+    color: white
+}
+
+.filter-btn:hover {
+    background-image: linear-gradient(rgb(0 0 0/30%) 0 0);
+}
+
+.search-btn:hover {
+    background-image: linear-gradient(rgb(0 0 0/30%) 0 0);
+}
+
+.search-btn {
+    font-size: 24px;
+    border-radius: 20px;
+    background-color: #ffd470;
+    border: 0px;
+    padding: 8px 15px;
+    margin-top: 0.8em
 }
 
 #answer-box {
-    width: 900px;
+    width: 700px;
     margin-top: 50px;
 }
 
@@ -113,4 +133,18 @@ h4 {
 
 .flavors {
     font-family: 'Montserrat', sans-serif;
+}
+
+.button {
+    width: 200px;
+    height: 100px;
+    border-radius: 20px;
+}
+
+.rate:hover {
+    background-image: linear-gradient(rgb(0 0 0/30%) 0 0);
+}
+
+.rate {
+    border-radius: 16px;
 }

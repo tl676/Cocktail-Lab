@@ -1,50 +1,63 @@
 <!doctype html>
-<title>{% block title %}{% endblock %} - Flaskr</title>
+
+<head>
+    <title>Cocktail Lab</title>
+    <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/9168/9168840.png">
+</head>
+
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Kanit&family=Montserrat&family=Open+Sans:wght@500&display=swap"
     rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <body>
     <div class="full-body-container">
         <div class="top-text">
             <div class="cocktail-text">
-                <img src="{{ url_for('static', filename='images/cocktail.png') }}">
+                <img src="{{ url_for('static', filename='images/cocktail.png')
+                    }}">
                 <h1>Cocktail Lab</h1>
             </div>
-            <p>Select Flavor Profile Preferences</p>
+            <h4>Select Flavor Profile Preferences:</h4>
             <div id="flavor-filter">
-                <button class="floral-btn filter-btn" data-flavor="floral" onclick="toggleActive(event)"
+                <button class="floral-btn filter-btn" style="background-color:
+                    #f8b1e3;" data-flavor="floral" onclick="toggleActive(event)"
                     onkeyup="filterText(event)">Floral</button>
-                <button class="bitter-btn filter-btn" data-flavor="bitter" onclick="toggleActive(event)"
+                <button class="bitter-btn filter-btn" style="background-color:
+                    #928bbd;" data-flavor="bitter" onclick="toggleActive(event)"
                     onkeyup="filterText(event)">Bitter</button>
-                <button class="sweet-btn filter-btn" data-flavor="sweet" onclick="toggleActive(event)"
+                <button class="sweet-btn filter-btn" style="background-color:
+                    #fca3a5;" data-flavor="sweet" onclick="toggleActive(event)"
                     onkeyup="filterText(event)">Sweet</button>
-                <button class="citrus-btn filter-btn" data-flavor="citrus" onclick="toggleActive(event)"
+                <button class="citrus-btn filter-btn" style="background-color:
+                    #fcf376;" data-flavor="citrus" onclick="toggleActive(event)"
                     onkeyup="filterText(event)">Citrus</button>
-                <button class="fruity-btn filter-btn" data-flavor="fruity" onclick="toggleActive(event)"
+                <button class="fruity-btn filter-btn" style="background-color:
+                    #d8649e;" data-flavor="fruity" onclick="toggleActive(event)"
                     onkeyup="filterText(event)">Fruity</button>
-                <button class="herbaceous-btn filter-btn" data-flavor="herbaceous" onclick="toggleActive(event)"
-                    onkeyup="filterText(event)">Herbaceous</button>
-                <button class="salty-btn filter-btn" data-flavor="salty" onclick="toggleActive(event)"
+                <button class="herbaceous-btn filter-btn" style="background-color: #9dc96a;" data-flavor="herbaceous"
+                    onclick="toggleActive(event)" onkeyup="filterText(event)">Herbaceous</button>
+                <button class="salty-btn filter-btn" style="background-color:
+                    #46d4ff;" data-flavor="salty" onclick="toggleActive(event)"
                     onkeyup="filterText(event)">Salty</button>
             </div>
             <div class="input-box" onclick="sendFocus(1)">
                 <img src="{{ url_for('static', filename='images/mag.png') }}" />
-                <input placeholder="Ingredient likes" id="ingred-prefs" onkeyup="filterText(event)">
+                <input placeholder="Ingredient likes" id="ingred-prefs" onkeyup="enterKey(event)">
             </div>
             <div class="input-box" onclick="sendFocus(4)">
                 <img src="{{ url_for('static', filename='images/mag.png') }}" />
-                <input placeholder="Ingredient dislikes" id="ingred-antiprefs" onkeyup="filterText(event)">
+                <input placeholder="Ingredient dislikes" id="ingred-antiprefs" onkeyup="enterKey(event)">
             </div>
             <div class="input-box" onclick="sendFocus(2)">
                 <img src="{{ url_for('static', filename='images/mag.png') }}" />
-                <input placeholder="Must include these ingredients" id="ingred-include" onkeyup="filterText(event)">
+                <input placeholder="Must include these ingredients" id="ingred-include" onkeyup="enterKey(event)">
             </div>
             <div class="input-box" onclick="sendFocus(3)">
                 <img src="{{ url_for('static', filename='images/mag.png') }}" />
-                <input placeholder="Must exclude these ingredients" id="ingred-exclude" onkeyup="filterText(event)">
+                <input placeholder="Must exclude these ingredients" id="ingred-exclude" onkeyup="enterKey(event)">
             </div>
 
             <!-- <div class="input-box" onclick="sendFocus(5)">
@@ -64,7 +77,8 @@
                 <input placeholder="Must exclude these flavors" id="flavor-exclude" onkeyup="filterText(event)">
             </div> -->
             <center>
-                <p>Press ENTER to search</p>
+                <button class="search-btn" onclick=filterText(event)>
+                    Search</button>
             </center>
             <!-- <div class="input-box" onclick="sendFocus(3)">
                 <img src="{{ url_for('static', filename='images/mag.png') }}" />
@@ -78,43 +92,59 @@
 
     <script>
         var last_focus = 0
-        function answerBoxTemplate(drink, ingreds, flavors, popularity, most_popular) {
+
+        function answerBoxTemplate(drink, ingreds, flavors, popularity, id) {
+            drink_format = drink.replace("'", "\\\'").replace('"', '\\\"')
+            if (id == -1) {
+                return `<div class=''>
+                <h4 class='drink'>${drink}</h4>
+            </div>`
+            }
             return `<div class=''>
                 <h4 class='drink'>${drink}</h4>
                 <p class='ingreds'>Ingredients: ${ingreds}</p>
                 <p class='flavors'>Flavors: ${flavors}</p>
                 <p class='popularity'>Popularity Score: ${popularity}</p>
+                <button class="rate" style="font-size:50px; color:#7bbf54; background-color:transparent; border:0px" onclick='rocchio_plus("` + id + `")'>
+                    <i class="fa fa-thumbs-up"></i></button>
+                <button class="rate" style="font-size:50px; color:#da6d7d; background-color:transparent; border:0px" onclick='rocchio_minus("` + id + `")'>
+                    <i class="fa fa-thumbs-down"></i></button>
                 <hr>
             </div>`
         }
 
-        function answerBoxTemplateStar(drink, ingreds, flavors, popularity, most_popular) {
-            return `<div class=''>
-                <h4 class='drink'>${drink}</h4>
-                <p class='ingreds'>Ingredients: ${ingreds}</p>
-                <p class='flavors'>Flavors: ${flavors}</p>
-                <p class='popularity'>Popularity Score: ${popularity}</p>
-                <img src="{{ url_for('static', filename='images/star.png') }}">
-                <hr>
-            </div>`
+        function rocchio_plus(drink) {
+            filterText(event, rocchio_up = drink, rocchio_down = "")
+        }
+
+        function rocchio_minus(drink) {
+            filterText(event, rocchio_up = "", rocchio_down = drink)
         }
 
         function sendFocus(x) {
             // i feel like this is spaghetti. this feels very stupid to me. unfortunately idk
             // if theres a better way to do this 🤪
-            //console.log(x)
             switch (x) {
-                case 1: document.getElementById('ingred-prefs').focus(); break;
-                case 2: document.getElementById('ingred-include').focus(); break;
-                case 3: document.getElementById('ingred-exclude').focus(); break;
-                case 4: document.getElementById('ingred-antiprefs').focus(); break;
+                case 1:
+                    document.getElementById('ingred-prefs').focus();
+                    break;
+                case 2:
+                    document.getElementById('ingred-include').focus();
+                    break;
+                case 3:
+                    document.getElementById('ingred-exclude').focus();
+                    break;
+                case 4:
+                    document.getElementById('ingred-antiprefs').focus();
+                    break;
 
                 // case 5: document.getElementById('flavor-prefs').focus(); break;
                 // case 6: document.getElementById('flavor-antiprefs').focus(); break;
                 // case 7: document.getElementById('flavor-include').focus(); break;
                 // case 8: document.getElementById('flavor-exclude').focus(); break;
 
-                default: document.activeElement.blur()
+                default:
+                    document.activeElement.blur()
 
             }
         }
@@ -135,49 +165,45 @@
                 activeFilters.push(flavor);
                 event.target.classList.add("active");
             }
-            console.log(activeFilters)
-            console.log(event.target.classList)
+            // console.log(activeFilters)
+            // console.log(event.target.classList)
             //filterText(event);
         }
 
-        function filterText(event) {
-            // only search on ENTER because it's buggy without it
-
+        function enterKey(event, rocchio_up = "", rocchio_down = "") {
             if (event.keyCode == 13) {
-
-                toggleActive(event)
-                let flavors = activeFilters.join(",");
-
-                document.getElementById("answer-box").innerHTML = ""
-                console.log(document.getElementById("ingred-prefs").value + ', ' + flavors);
-
-
-                fetch("/query?" + new URLSearchParams({
-                    // TODO change from flavor to ingreds
-                    ingred_prefs: document.getElementById("ingred-prefs").value + ', ' + flavors,
-                    ingred_antiprefs: document.getElementById("ingred-antiprefs").value,
-                    ingred_include: document.getElementById("ingred-include").value,
-                    ingred_exclude: document.getElementById("ingred-exclude").value
-                }).toString())
-                    .then((response) => response.json())
-                    .then((data) => data.forEach(row => {
-                        //console.log(data)
-                        //console.log(row)
-                        if (row.most_popular == true) {
-                            let tempDiv = document.createElement("div")
-                            tempDiv.innerHTML = answerBoxTemplateStar(row.name, row.ingredients, row.flavors, row.popularity, row.most_popular)
-                            document.getElementById("answer-box").appendChild(tempDiv)
-                        } else {
-                            let tempDiv = document.createElement("div")
-                            tempDiv.innerHTML = answerBoxTemplate(row.name, row.ingredients, row.flavors, row.popularity, row.most_popular)
-                            document.getElementById("answer-box").appendChild(tempDiv)
-                        }
-                        // let tempDiv = document.createElement("div")
-                        // tempDiv.innerHTML = answerBoxTemplateStar(row.name, row.ingredients, row.flavors, row.popularity, row.most_popular)
-                        // document.getElementById("answer-box").appendChild(tempDiv)
-                    }));
+                filterText(event, rocchio_up = "", rocchio_down = "")
             }
         }
 
+        function filterText(event, rocchio_up = "", rocchio_down = "") {
+            // only search on ENTER because it's buggy without it
+            console.log(rocchio_up + rocchio_down)
+
+
+            let flavors = activeFilters.join(",");
+
+            document.getElementById("answer-box").innerHTML = ""
+            // console.log(document.getElementById("ingred-prefs").value + ', ' + flavors);
+
+
+            fetch("/query?" + new URLSearchParams({
+                // TODO change from flavor to ingreds
+                ingred_prefs: document.getElementById("ingred-prefs").value + ', ' + flavors,
+                ingred_antiprefs: document.getElementById("ingred-antiprefs").value,
+                ingred_include: document.getElementById("ingred-include").value,
+                ingred_exclude: document.getElementById("ingred-exclude").value,
+                rocchio_plus: rocchio_up,
+                rocchio_minus: rocchio_down
+            }).toString())
+                .then((response) => response.json())
+                .then((data) => data.forEach(row => {
+                    //console.log(data)
+                    //console.log(row)
+                    let tempDiv = document.createElement("div")
+                    tempDiv.innerHTML = answerBoxTemplate(row.name, row.ingredients, row.flavors, row.popularity, row.id)
+                    document.getElementById("answer-box").appendChild(tempDiv)
+                }));
+        }
     </script>
 </body>
