@@ -113,6 +113,28 @@
             </div>`
         }
 
+        function answerBoxTemplateStar(drink, ingreds, flavors, popularity, id, most_popular) {
+            drink_format = drink.replace("'", "\\\'").replace('"', '\\\"')
+            if (id == -1) {
+                return `<div class=''>
+                <h4 class='drink'>${drink}</h4>
+            </div>`
+            }
+            return `<div class=''>
+                <h4 class='drink'>${drink}</h4>
+                <p class='ingreds'>Ingredients: ${ingreds}</p>
+                <p class='flavors'>Flavors: ${flavors}</p>
+                <p class='popularity'>Popularity Score: ${popularity}</p>
+                <button class="rate" style="font-size:50px; color:#7bbf54; background-color:transparent; border:0px" onclick='rocchio_plus("` + id + `")'>
+                    <i class="fa fa-thumbs-up"></i></button>
+                <button class="rate" style="font-size:50px; color:#da6d7d; background-color:transparent; border:0px" onclick='rocchio_minus("` + id + `")'>
+                    <i class="fa fa-thumbs-down"></i></button>
+                <img src="{{ url_for('static', filename='images/star2.png')
+                }}" align="right" width="50" height="50">
+                <hr>
+            </div>`
+        }
+
         function rocchio_plus(drink) {
             filterText(event, rocchio_up = drink, rocchio_down = "")
         }
@@ -200,9 +222,15 @@
                 .then((data) => data.forEach(row => {
                     //console.log(data)
                     //console.log(row)
-                    let tempDiv = document.createElement("div")
-                    tempDiv.innerHTML = answerBoxTemplate(row.name, row.ingredients, row.flavors, row.popularity, row.id)
-                    document.getElementById("answer-box").appendChild(tempDiv)
+                    if (row.most_popular == true) {
+                        let tempDiv = document.createElement("div")
+                        tempDiv.innerHTML = answerBoxTemplateStar(row.name, row.ingredients, row.flavors, row.popularity, row.id, row.most_popular)
+                        document.getElementById("answer-box").appendChild(tempDiv)
+                    } else {
+                        let tempDiv = document.createElement("div")
+                        tempDiv.innerHTML = answerBoxTemplate(row.name, row.ingredients, row.flavors, row.popularity, row.id)
+                        document.getElementById("answer-box").appendChild(tempDiv)
+                    }
                 }));
         }
     </script>

@@ -59,6 +59,7 @@ def episodes_search():
     res = cocktailLab.query(ingred_prefs, ingred_antiprefs, ingred_include, ingred_exclude)[:10]
     for i in range(len(res)):
         if res[i]['popularity'] > max_pop:
+            max_pop = res[i]['popularity']
             max_i = i
 
     for i in range(len(res)):
