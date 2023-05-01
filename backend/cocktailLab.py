@@ -7,18 +7,18 @@ class CocktailLab:
     def __init__(self):
         """Dictionary of {drink name: ingredients}"""
         self.cocktail_names_to_ingreds = self.read_file_ingreds(
-            'data/cocktail_flavors_ingreds_popularity.csv')
+            'data/final_cocktail_flavors_ingreds_popularity.csv')
 
         self.cocktail_names_to_ingreds_only = self.read_file_ingreds(
-            'data/cocktail_flavors_ingreds_popularity.csv', ingreds_only=True)
+            'data/final_cocktail_flavors_ingreds_popularity.csv', ingreds_only=True)
 
         """Dictionary of {drink name: flavors}"""
         self.cocktail_names_to_flavors = self.read_file_flavors(
-            'data/cocktail_flavors_ingreds_popularity.csv')
+            'data/final_cocktail_flavors_ingreds_popularity.csv')
 
         """Dictionary of {drink name: popularity}"""
         self.cocktail_names_to_popularity = self.read_file_popularity(
-            'data/cocktail_flavors_ingreds_popularity.csv')
+            'data/final_cocktail_flavors_ingreds_popularity.csv')
 
         """Number of cocktails"""
         self.num_cocktails = len(self.cocktail_names_to_ingreds)
@@ -141,7 +141,7 @@ class CocktailLab:
         tf_mat = TfidfVectorizer(max_df=max_df, min_df=min_df,
                                  stop_words=stop_words, use_idf=use_idf,
                                  binary=binary, norm=norm,
-                                #  analyzer='word', token_pattern='[^,]+'
+                                 #  analyzer='word', token_pattern='[^,]+'
                                  )
 
         return tf_mat
@@ -206,7 +206,6 @@ class CocktailLab:
             retval.append([d, sim])
         return list(sorted(retval, reverse=True, key=lambda x: x[1]))
 
-
     def boolean_search_and(self, query, doc_by_vocab):
         """ Returns a list of doc indexes that contain all the query words
 
@@ -247,7 +246,7 @@ class CocktailLab:
             if np.sum(combine) == 0:
                 retval.append(idx)
         return retval
-    
+
     def comma_space_split(self, str):
         return [i for i in ",".join(str.split(" ")).split(",") if i]
 
