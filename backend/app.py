@@ -50,7 +50,9 @@ def episodes_search():
     ingred_antiprefs = request.args.get("ingred_antiprefs")
     ingred_include = request.args.get("ingred_include")
     ingred_exclude = request.args.get("ingred_exclude")
+    rocchio_plus = request.args.get("rocchio_plus")
+    rocchio_minus = request.args.get("rocchio_minus")
 
-    return json.dumps(cocktailLab.query(ingred_prefs, ingred_antiprefs, ingred_include, ingred_exclude)[:10])
+    return json.dumps(cocktailLab.query(ingred_prefs, ingred_antiprefs, ingred_include, ingred_exclude, rocchio_plus, rocchio_minus)[:10])
 
 # app.run(debug=True)
