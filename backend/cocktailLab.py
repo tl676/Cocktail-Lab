@@ -8,18 +8,18 @@ class CocktailLab:
     def __init__(self):
         """Dictionary of {drink name: ingredients}"""
         self.cocktail_names_to_ingreds = self.read_file_ingreds(
-            'data/cocktail_flavors_ingreds_popularity.csv')
+            'data/final_cocktail_flavors_ingreds_popularity.csv')
 
         self.cocktail_names_to_ingreds_only = self.read_file_ingreds(
-            'data/cocktail_flavors_ingreds_popularity.csv', ingreds_only=True)
+            'data/final_cocktail_flavors_ingreds_popularity.csv', ingreds_only=True)
 
         """Dictionary of {drink name: flavors}"""
         self.cocktail_names_to_flavors = self.read_file_flavors(
-            'data/cocktail_flavors_ingreds_popularity.csv')
+            'data/final_cocktail_flavors_ingreds_popularity.csv')
 
         """Dictionary of {drink name: popularity}"""
         self.cocktail_names_to_popularity = self.read_file_popularity(
-            'data/cocktail_flavors_ingreds_popularity.csv')
+            'data/final_cocktail_flavors_ingreds_popularity.csv')
 
         """Number of cocktails"""
         self.num_cocktails = len(self.cocktail_names_to_ingreds)
