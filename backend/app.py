@@ -51,6 +51,22 @@ def episodes_search():
     ingred_include = request.args.get("ingred_include")
     ingred_exclude = request.args.get("ingred_exclude")
 
-    return json.dumps(cocktailLab.query(ingred_prefs, ingred_antiprefs, ingred_include, ingred_exclude)[:10])
+    # res = json.dumps(cocktailLab.query(ingred_prefs, ingred_antiprefs, ingred_include, ingred_exclude)[:10])
+    max_pop = 0
+    max_i = 0
+    res = cocktailLab.query(ingred_prefs, ingred_antiprefs, ingred_include, ingred_exclude)[:10]
+    for i in range(len(res)):
+        if res[i]['popularity'] > max_pop:
+            max_i = i
+
+    for i in range(len(res)):
+        if i == max_i:
+            res[i] = dict(res[i], **{'most_popular':True})
+        else:
+            res[i] = dict(res[i], **{'most_popular':False})
+
+    # res = json.dumps(cocktailLab.query(ingred_prefs, ingred_antiprefs, ingred_include, ingred_exclude)[:10])
+
+    return json.dumps(res)
 
 # app.run(debug=True)

@@ -78,12 +78,23 @@
 
     <script>
         var last_focus = 0
-        function answerBoxTemplate(drink, ingreds, flavors, popularity) {
+        function answerBoxTemplate(drink, ingreds, flavors, popularity, most_popular) {
             return `<div class=''>
                 <h4 class='drink'>${drink}</h4>
                 <p class='ingreds'>Ingredients: ${ingreds}</p>
                 <p class='flavors'>Flavors: ${flavors}</p>
                 <p class='popularity'>Popularity Score: ${popularity}</p>
+                <hr>
+            </div>`
+        }
+
+        function answerBoxTemplateStar(drink, ingreds, flavors, popularity, most_popular) {
+            return `<div class=''>
+                <h4 class='drink'>${drink}</h4>
+                <p class='ingreds'>Ingredients: ${ingreds}</p>
+                <p class='flavors'>Flavors: ${flavors}</p>
+                <p class='popularity'>Popularity Score: ${popularity}</p>
+                <img src="{{ url_for('static', filename='images/star.png') }}">
                 <hr>
             </div>`
         }
@@ -152,9 +163,18 @@
                     .then((data) => data.forEach(row => {
                         //console.log(data)
                         //console.log(row)
-                        let tempDiv = document.createElement("div")
-                        tempDiv.innerHTML = answerBoxTemplate(row.name, row.ingredients, row.flavors, row.popularity)
-                        document.getElementById("answer-box").appendChild(tempDiv)
+                        if (row.most_popular == true) {
+                            let tempDiv = document.createElement("div")
+                            tempDiv.innerHTML = answerBoxTemplateStar(row.name, row.ingredients, row.flavors, row.popularity, row.most_popular)
+                            document.getElementById("answer-box").appendChild(tempDiv)
+                        } else {
+                            let tempDiv = document.createElement("div")
+                            tempDiv.innerHTML = answerBoxTemplate(row.name, row.ingredients, row.flavors, row.popularity, row.most_popular)
+                            document.getElementById("answer-box").appendChild(tempDiv)
+                        }
+                        // let tempDiv = document.createElement("div")
+                        // tempDiv.innerHTML = answerBoxTemplateStar(row.name, row.ingredients, row.flavors, row.popularity, row.most_popular)
+                        // document.getElementById("answer-box").appendChild(tempDiv)
                     }));
             }
         }
