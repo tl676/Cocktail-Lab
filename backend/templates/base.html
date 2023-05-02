@@ -104,7 +104,7 @@
                 <h4 class='drink'>${drink}</h4>
                 <p class='ingreds'>Ingredients: ${ingreds}</p>
                 <p class='flavors'>Flavors: ${flavors}</p>
-                <p class='popularity'>Popularity Score: ${popularity}</p>
+                <p class='popularity'>Popularity Score: ${Math.round(popularity * 100) / 100}</p>
                 <button class="rate" style="font-size:50px; color:#7bbf54; background-color:transparent; border:0px" onclick='rocchio_plus("` + id + `")'>
                     <i class="fa fa-thumbs-up"></i></button>
                 <button class="rate" style="font-size:50px; color:#da6d7d; background-color:transparent; border:0px" onclick='rocchio_minus("` + id + `")'>
@@ -124,7 +124,7 @@
                 <h4 class='drink'>${drink}</h4>
                 <p class='ingreds'>Ingredients: ${ingreds}</p>
                 <p class='flavors'>Flavors: ${flavors}</p>
-                <p class='popularity'>Popularity Score: ${popularity}</p>
+                <p class='popularity'>Popularity Score: ${Math.round(popularity * 100) / 100}</p>
                 <button class="rate" style="font-size:50px; color:#7bbf54; background-color:transparent; border:0px" onclick='rocchio_plus("` + id + `")'>
                     <i class="fa fa-thumbs-up"></i></button>
                 <button class="rate" style="font-size:50px; color:#da6d7d; background-color:transparent; border:0px" onclick='rocchio_minus("` + id + `")'>
