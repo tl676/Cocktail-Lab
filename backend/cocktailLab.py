@@ -117,7 +117,7 @@ class CocktailLab:
         Parameters:
         binary: bool (Default = False)
             A flag to switch between tf-idf representation and binary representation
-        max_df: float (Defualt = 1.0)
+        max_df: float (Default = 1.0)
             The maximum document frequency to use for the matrix, as a proportion of 
             docs.
         min_df: float or int (Default = 1)

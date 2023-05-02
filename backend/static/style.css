@@ -56,7 +56,7 @@ h4 {
     margin-top: 0.3em;
     padding: 5px;
     width: 600px;
-    background-color: #D8EEFA;
+    background-color: #f3fbff;
 }
 
 .input-box img {
@@ -76,7 +76,7 @@ h4 {
     font-size: 16px;
     border: none;
     outline: 0;
-    background-color: #D8EEFA;
+    background-color: #f3fbff;
 }
 
 .filter-btn {
@@ -110,7 +110,7 @@ h4 {
 }
 
 .search-btn {
-    font-size: 24px;
+    font-size: 18px;
     border-radius: 20px;
     background-color: #ffd470;
     border: 0px;
