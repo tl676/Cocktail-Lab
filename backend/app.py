@@ -56,7 +56,7 @@ def episodes_search():
     # res = json.dumps(cocktailLab.query(ingred_prefs, ingred_antiprefs, ingred_include, ingred_exclude)[:10])
     max_pop = 0
     max_i = 0
-    res = cocktailLab.query(ingred_prefs, ingred_antiprefs, ingred_include, ingred_exclude)[:10]
+    res = cocktailLab.query(ingred_prefs, ingred_antiprefs, ingred_include, ingred_exclude, rocchio_plus, rocchio_minus)[:10]
     for i in range(len(res)):
         if res[i]['popularity'] > max_pop:
             max_pop = res[i]['popularity']

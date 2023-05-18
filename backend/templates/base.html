@@ -105,6 +105,8 @@
                 <p class='ingreds'>Ingredients: ${ingreds}</p>
                 <p class='flavors'>Flavors: ${flavors}</p>
                 <p class='popularity'>Popularity Score: ${Math.round(popularity * 100) / 100}</p>
+                
+                
                 <button class="rate" style="font-size:50px; color:#7bbf54; background-color:transparent; border:0px" onclick='rocchio_plus("` + id + `")'>
                     <i class="fa fa-thumbs-up"></i></button>
                 <button class="rate" style="font-size:50px; color:#da6d7d; background-color:transparent; border:0px" onclick='rocchio_minus("` + id + `")'>
@@ -136,6 +138,7 @@
         }
 
         function rocchio_plus(drink) {
+            console.log("up")
             filterText(event, rocchio_up = drink, rocchio_down = "")
         }
 
@@ -200,8 +203,8 @@
 
         function filterText(event, rocchio_up = "", rocchio_down = "") {
             // only search on ENTER because it's buggy without it
-            console.log(rocchio_up + rocchio_down)
-
+            console.log("up: " + rocchio_up)
+            console.log("down: " + rocchio_down)
 
             let flavors = activeFilters.join(",");
 
